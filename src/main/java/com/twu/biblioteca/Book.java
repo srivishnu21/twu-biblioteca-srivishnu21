@@ -11,8 +11,8 @@ public class Book {
         this.authorName = authorName;
     }
 
-    public void printDetails() {
-        System.out.println(bookName + " , " + yearPublished + " , " + authorName);
+    public String toString(){
+        return bookName + "\t,\t" + yearPublished + "\t,\t" + authorName;
     }
 
 }

@@ -2,7 +2,13 @@ package com.twu.biblioteca;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class BibliotecaAppTest {
 
@@ -13,4 +19,18 @@ class BibliotecaAppTest {
         assertEquals(expected, BibliotecaApp.displayWelcomeMessage());
     }
 
+    @Test
+    void shouldCheckTheListOfAllBooksPrinted() {
+        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+                (new Book("book2", 2010, "xyz"))));
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+
+        BibliotecaApp.displayListOfBooks(bookList);
+
+        verify(mockedPrintStream, times(1)).println("Book Name\t\tYear Published\t\tAuthor Name");
+        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc");
+        verify(mockedPrintStream, times(1)).println("book2\t,\t2010\t,\txyz");
+
+    }
 }
