@@ -13,15 +13,31 @@ class LibraryTest {
 
     @Test
     void shouldCheckAllBookNameInListGetsPrintedCorrectly() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1"), new Book("book2")));
+        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2010, "ssv"),
+                new Book("book2",2013,"jhb")));
         Library library = new Library(bookList);
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
         library.displayListOfBooks();
 
-        verify(mockedPrintStream, times(1)).println("book1");
-        verify(mockedPrintStream, times(1)).println("book2");
+        verify(mockedPrintStream, times(1)).println("Book Name\t\tYear Published\t\tAuthor Name");
+        verify(mockedPrintStream, times(1)).println("book1 , 2010 , ssv");
+        verify(mockedPrintStream, times(1)).println("book2 , 2013 , jhb");
     }
 
+    @Test
+    void shouldCheckAllDetailsOfBooksIsPrinted() {
+        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+                (new Book("book2", 2010, "xyz"))));
+        Library library = new Library(bookList);
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+
+        library.displayListOfBooks();
+
+        verify(mockedPrintStream, times(1)).println("Book Name\t\tYear Published\t\tAuthor Name");
+        verify(mockedPrintStream, times(1)).println("book1 , 2000 , abc");
+        verify(mockedPrintStream, times(1)).println("book2 , 2010 , xyz");
+    }
 }

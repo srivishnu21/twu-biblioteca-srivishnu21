@@ -13,5 +13,4 @@ class BibliotecaAppTest {
         assertEquals(expected, BibliotecaApp.displayWelcomeMessage());
     }
 
-
 }

@@ -10,6 +10,7 @@ public class Library {
     }
 
     public void displayListOfBooks() {
+        System.out.println("Book Name\t\tYear Published\t\tAuthor Name");
         for (Book book : bookList) {
             book.printDetails();
         }
