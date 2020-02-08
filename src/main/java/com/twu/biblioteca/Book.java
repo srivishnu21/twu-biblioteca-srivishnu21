@@ -14,4 +14,5 @@ public class Book {
     public void printDetails() {
         System.out.println(bookName + " , " + yearPublished + " , " + authorName);
     }
+
 }
