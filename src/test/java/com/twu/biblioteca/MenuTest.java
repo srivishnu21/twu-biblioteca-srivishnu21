@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class MenuTest {
@@ -16,21 +15,21 @@ class MenuTest {
     void shouldCheckIfDisplayMenuMethodDisplayEveryMenu() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Menu menu=new Menu(new BookKeeper(new ArrayList<>()));
+        Menu menu = new Menu(new BookKeeper(new ArrayList<>()));
 
         menu.displayMenu();
 
-        verify(mockedPrintStream,times(1)).println("Menu options");
-        verify(mockedPrintStream,times(1)).println("1.  Display List of all books");
-        verify(mockedPrintStream,times(1)).println("2.  Check out a book");
-        verify(mockedPrintStream,times(1)).println("Please Enter A Number");
+        verify(mockedPrintStream, times(1)).println("Menu options");
+        verify(mockedPrintStream, times(1)).println("1.  Display List of all books");
+        verify(mockedPrintStream, times(1)).println("2.  Check out a book");
+        verify(mockedPrintStream, times(1)).println("Please Enter A Number");
     }
 
     @Test
     void shouldCheckIfMenuListIsDisplayedAndListOfBooksIsDisplayed() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Menu menu=new Menu(new BookKeeper(new ArrayList<>()));
+        Menu menu = new Menu(new BookKeeper(new ArrayList<>()));
 
         menu.doAction(1);
 
@@ -41,7 +40,7 @@ class MenuTest {
     void shouldCheckIfMenuListIsDisplayedAndIfInvalidNumberIsEnteredDisplayInvalidMessage() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Menu menu=new Menu(new BookKeeper(new ArrayList<>()));
+        Menu menu = new Menu(new BookKeeper(new ArrayList<>()));
 
         menu.doAction(22);
 
@@ -55,7 +54,7 @@ class MenuTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
         BookKeeper bookKeeper = new BookKeeper(bookList);
-        Menu menu=new Menu(bookKeeper);
+        Menu menu = new Menu(bookKeeper);
 
         menu.doAction(2);
 

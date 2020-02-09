@@ -22,9 +22,15 @@ public class BookKeeper {
         if (book != null) {
             bookCheckedOutList.put(book, Boolean.TRUE);
             printer.print("Thank you! Enjoy the book");
-        }
-        else {
+        } else {
             printer.print("Sorry, that book is not available");
+        }
+    }
+
+    public void returnBook(String bookName) {
+        Book book = getBook(bookName);
+        if(book!=null){
+            bookCheckedOutList.put(book,Boolean.FALSE);
         }
     }
 
