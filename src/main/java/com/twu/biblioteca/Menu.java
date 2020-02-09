@@ -37,6 +37,7 @@ public class Menu {
         Map<Integer, String> menuMap = new HashMap<>();
         menuMap.put(1, "Display List of all books");
         menuMap.put(2, "Check out a book");
+        menuMap.put(3, "Return a book");
         return menuMap;
     }
 }
