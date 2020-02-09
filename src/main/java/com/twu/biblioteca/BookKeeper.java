@@ -11,8 +11,10 @@ public class BookKeeper {
     }
 
     public void displayListOfBooks() {
+        StringBuilder bookListBuilder = new StringBuilder();
         for (Book book : bookList) {
-            printer.printBookDetails(book);
+            bookListBuilder.append(book.toString()).append("\n");
         }
+        printer.print(bookListBuilder.toString());
     }
 }

@@ -21,8 +21,7 @@ class BookKeeperTest {
         BookKeeper bookKeeper=new BookKeeper(bookList);
         bookKeeper.displayListOfBooks();
 
-        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc");
-        verify(mockedPrintStream, times(1)).println("book2\t,\t2010\t,\txyz");
+        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
 
     }
 
