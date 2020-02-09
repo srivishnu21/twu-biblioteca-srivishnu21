@@ -24,6 +24,7 @@ public class BibliotecaApp {
             List<Book> bookList = getListOfBooks();
             displayListOfBooks(bookList);
         }
+        else printer.print("Invalid option.Please Enter correct option!");
     }
 
     public static void displayListOfBooks(List<Book> bookList) {
