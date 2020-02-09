@@ -2,20 +2,32 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BibliotecaApp {
 
     static Printer printer = new Printer();
 
     public static void main(String[] args) {
-        printer.printAString(displayWelcomeMessage());
-        List<Book> bookList = getListOfBooks();
-        displayListOfBooks(bookList);
+        Scanner scanner = new Scanner(System.in);
+        printer.print(displayWelcomeMessage());
+        printer.print("Menu options");
+        printer.print("1. Show List Of Books");
+        printer.print("Please Enter A Number");
+        int action = scanner.nextInt();
+        displayMenu(action);
 
     }
 
+    static void displayMenu(int action) {
+        if (action == 1) {
+            List<Book> bookList = getListOfBooks();
+            displayListOfBooks(bookList);
+        }
+    }
+
     public static void displayListOfBooks(List<Book> bookList) {
-        printer.printAString("Book Name\t\tYear Published\t\tAuthor Name");
+        printer.print("Book Name\t\tYear Published\t\tAuthor Name");
         for (Book book : bookList) {
             printer.printBookDetails(book);
         }

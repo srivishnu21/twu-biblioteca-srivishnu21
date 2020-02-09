@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class BibliotecaAppTest {
@@ -32,5 +32,16 @@ class BibliotecaAppTest {
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc");
         verify(mockedPrintStream, times(1)).println("book2\t,\t2010\t,\txyz");
 
+    }
+
+
+    @Test
+    void shouldCheckIfMenuListIsDisplayedAndListOfBooksIsDisplayed() {
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+
+        BibliotecaApp.displayMenu(1);
+
+        verify(mockedPrintStream, times(1)).println("Book Name\t\tYear Published\t\tAuthor Name");
     }
 }

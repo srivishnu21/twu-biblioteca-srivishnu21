@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 public class Printer {
 
-    public void printAString(String string) {
+    public void print(String string) {
         System.out.println(string);
     }
 

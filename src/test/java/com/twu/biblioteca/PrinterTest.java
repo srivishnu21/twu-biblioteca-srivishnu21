@@ -14,7 +14,7 @@ class PrinterTest {
         System.setOut(mockedPrintStream);
         Printer printer = new Printer();
 
-        printer.printAString("Hello World");
+        printer.print("Hello World");
 
         verify(mockedPrintStream, times(1)).println("Hello World");
     }
