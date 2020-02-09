@@ -18,7 +18,6 @@ public class BookKeeper {
     }
 
     public void checkOutBook(String bookName) {
-        displayListOfBooksAvailable();
         Book book = getBook(bookName);
         if (book != null) {
             bookCheckedOutList.put(book, Boolean.TRUE);
@@ -39,13 +38,14 @@ public class BookKeeper {
         return null;
     }
 
-    private void displayListOfBooksAvailable() {
+    void displayListOfBooksAvailable() {
         StringBuilder bookListBuilder = new StringBuilder();
         for (Book book : bookList) {
             if (!bookCheckedOutList.get(book))
                 bookListBuilder.append(book.toString()).append("\n");
         }
         printer.print(bookListBuilder.toString());
+        printer.print("Please enter the name of book want to checkout");
     }
 
     public void displayListOfAllBooks() {

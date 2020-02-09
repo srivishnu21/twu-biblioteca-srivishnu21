@@ -24,7 +24,14 @@ public class Menu {
         if (actionItem == 1) {
             printer.print("Book Name\t\tYear Published\t\tAuthor Name");
             bookKeeper.displayListOfAllBooks();
-        } else printer.print("Invalid option.Please Enter correct option!");
+        }
+        if(actionItem==2){
+            bookKeeper.displayListOfBooksAvailable();
+            printer.print("Please Enter the name of the book want to checkout");
+            String bookName=new String();
+            bookKeeper.checkOutBook(bookName);
+        }
+        else printer.print("Invalid option.Please Enter correct option!");
     }
 
     private Map<Integer, String> getMenuMap() {

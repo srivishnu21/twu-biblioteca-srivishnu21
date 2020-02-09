@@ -23,6 +23,20 @@ class BookKeeperTest {
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
 
+
+    @Test
+    void shouldDisplayListOfBooksAvailable() {
+        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+                (new Book("book2", 2010, "xyz"))));
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+
+        BookKeeper bookKeeper = new BookKeeper(bookList);
+        bookKeeper.displayListOfBooksAvailable();
+
+        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
+    }
+
     @Test
     void shouldCheckOutABook() {
         List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
@@ -33,8 +47,9 @@ class BookKeeperTest {
         BookKeeper bookKeeper = new BookKeeper(bookList);
         bookKeeper.checkOutBook("book1");
 
-        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
+        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
     }
+
 
     @Test
     void shouldCheckOutABookIfItContainsDisplaySuccessAMessage() {
@@ -46,7 +61,6 @@ class BookKeeperTest {
         BookKeeper bookKeeper = new BookKeeper(bookList);
         bookKeeper.checkOutBook("book2");
 
-        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
         verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
     }
 
@@ -60,7 +74,8 @@ class BookKeeperTest {
         BookKeeper bookKeeper = new BookKeeper(bookList);
         bookKeeper.checkOutBook("hffhtdt");
 
-        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
+
+
         verify(mockedPrintStream, times(1)).println("Sorry, that book is not available");
     }
 }

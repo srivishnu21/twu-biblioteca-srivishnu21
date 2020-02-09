@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -44,6 +46,20 @@ class MenuTest {
         menu.doAction(22);
 
         verify(mockedPrintStream, times(1)).println("Invalid option.Please Enter correct option!");
+    }
+
+    @Test
+    void shouldCheckIfMenuListIsDisplayedAndCheckOutABook() {
+        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+                (new Book("book2", 2010, "xyz"))));
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        BookKeeper bookKeeper = new BookKeeper(bookList);
+        Menu menu=new Menu(bookKeeper);
+
+        menu.doAction(2);
+
+        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
 
 }
