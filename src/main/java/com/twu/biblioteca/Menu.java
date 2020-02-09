@@ -28,8 +28,13 @@ public class Menu {
         if (actionItem == 2) {
             bookKeeper.displayListOfBooksAvailable();
             printer.print("Please Enter the name of the book want to checkout");
-            String bookName = new String();
+            String bookName = "";
             bookKeeper.checkOutBook(bookName);
+        }
+        if (actionItem == 3) {
+            printer.print("Please Enter the name of the book want to return");
+            String bookName = "";
+            bookKeeper.returnBook(bookName);
         } else printer.print("Invalid option.Please Enter correct option!");
     }
 

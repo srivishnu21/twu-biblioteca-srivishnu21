@@ -62,4 +62,18 @@ class MenuTest {
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
 
+    @Test
+    void shouldCheckIfMenuListIsDisplayedAndReturn() {
+        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+                (new Book("book2", 2010, "xyz"))));
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        BookKeeper bookKeeper = new BookKeeper(bookList);
+        Menu menu = new Menu(bookKeeper);
+
+        menu.doAction(3);
+
+        verify(mockedPrintStream, times(1)).println("Please Enter the name of the book want to return");
+    }
+
 }
