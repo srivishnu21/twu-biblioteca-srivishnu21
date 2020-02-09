@@ -24,6 +24,9 @@ public class BookKeeper {
             bookCheckedOutList.put(book, Boolean.TRUE);
             printer.print("Thank you! Enjoy the book");
         }
+        else {
+            printer.print("Sorry, that book is not available");
+        }
     }
 
     private Book getBook(String bookName) {
