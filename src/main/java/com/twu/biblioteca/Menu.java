@@ -23,13 +23,14 @@ public class Menu {
     public void doAction(int actionItem) {
         if (actionItem == 1) {
             printer.print("Book Name\t\tYear Published\t\tAuthor Name");
-            bookKeeper.displayListOfBooks();
+            bookKeeper.displayListOfAllBooks();
         } else printer.print("Invalid option.Please Enter correct option!");
     }
 
     private Map<Integer, String> getMenuMap() {
         Map<Integer, String> menuMap = new HashMap<>();
         menuMap.put(1, "Display List of all books");
+        menuMap.put(2, "Check out a book");
         return menuMap;
     }
 }
