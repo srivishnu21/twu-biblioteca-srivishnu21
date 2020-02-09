@@ -29,9 +29,11 @@ public class BookKeeper {
 
     public void returnBook(String bookName) {
         Book book = getBook(bookName);
-        if(book!=null){
-            bookCheckedOutList.put(book,Boolean.FALSE);
+        if (book != null) {
+            bookCheckedOutList.put(book, Boolean.FALSE);
             printer.print("Thank you for returning the book");
+        } else {
+            printer.print("That is not a valid book to return.");
         }
     }
 
