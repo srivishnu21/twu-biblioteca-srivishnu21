@@ -8,6 +8,7 @@ public class BibliotecaApp {
     static Printer printer = new Printer();
 
     public static void main(String[] args) {
+        List<Book>bookList=new ArrayList<>();
         printer.print(displayWelcomeMessage());
         Menu menu = new Menu();
         menu.displayMenu();

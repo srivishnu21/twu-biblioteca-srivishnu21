@@ -21,4 +21,27 @@ class MenuTest {
         verify(mockedPrintStream,times(1)).println("1.  Display List of all books");
         verify(mockedPrintStream,times(1)).println("Please Enter A Number");
     }
+
+    @Test
+    void shouldCheckIfMenuListIsDisplayedAndListOfBooksIsDisplayed() {
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        Menu menu=new Menu();
+
+        menu.doAction(1);
+
+        verify(mockedPrintStream, times(1)).println("Book Name\t\tYear Published\t\tAuthor Name");
+    }
+
+    @Test
+    void shouldCheckIfMenuListIsDisplayedAndIfInvalidNumberIsEnteredDisplayInvalidMessage() {
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        Menu menu=new Menu();
+
+        menu.doAction(22);
+
+        verify(mockedPrintStream, times(1)).println("Invalid option.Please Enter correct option!");
+    }
+
 }

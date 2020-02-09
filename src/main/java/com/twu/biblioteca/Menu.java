@@ -1,11 +1,10 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Menu {
-    Scanner scanner = new Scanner(System.in);
     Map<Integer, String> menuMap = getMenuMap();
     Printer printer = new Printer();
     int actionItem = getActionNumber();
@@ -18,8 +17,14 @@ public class Menu {
         printer.print("Please Enter A Number");
     }
 
+    public void doAction(int actionItem) {
+        if (actionItem == 1) {
+            BibliotecaApp.displayListOfBooks(new ArrayList<>());
+        } else printer.print("Invalid option.Please Enter correct option!");
+    }
+
     public int getActionNumber() {
-        return scanner.nextInt();
+        return 1;
     }
 
     private Map<Integer, String> getMenuMap() {
