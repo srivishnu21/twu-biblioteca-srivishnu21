@@ -31,6 +31,7 @@ public class BookKeeper {
         Book book = getBook(bookName);
         if(book!=null){
             bookCheckedOutList.put(book,Boolean.FALSE);
+            printer.print("Thank you for returning the book");
         }
     }
 
