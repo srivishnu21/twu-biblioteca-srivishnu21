@@ -1,13 +1,16 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
     Map<Integer, String> menuMap = getMenuMap();
     Printer printer = new Printer();
-    int actionItem = getActionNumber();
+    private BookKeeper bookKeeper;
+
+    public Menu(BookKeeper bookKeeper) {
+        this.bookKeeper = bookKeeper;
+    }
 
     public void displayMenu() {
         printer.print("Menu options");
@@ -19,12 +22,9 @@ public class Menu {
 
     public void doAction(int actionItem) {
         if (actionItem == 1) {
-            BibliotecaApp.displayListOfBooks(new ArrayList<>());
+            printer.print("Book Name\t\tYear Published\t\tAuthor Name");
+            bookKeeper.displayListOfBooks();
         } else printer.print("Invalid option.Please Enter correct option!");
-    }
-
-    public int getActionNumber() {
-        return 1;
     }
 
     private Map<Integer, String> getMenuMap() {

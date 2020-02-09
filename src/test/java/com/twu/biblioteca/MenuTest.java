@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -13,7 +14,7 @@ class MenuTest {
     void shouldCheckIfDisplayMenuMethodDisplayEveryMenu() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Menu menu=new Menu();
+        Menu menu=new Menu(new BookKeeper(new ArrayList<>()));
 
         menu.displayMenu();
 
@@ -26,7 +27,7 @@ class MenuTest {
     void shouldCheckIfMenuListIsDisplayedAndListOfBooksIsDisplayed() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Menu menu=new Menu();
+        Menu menu=new Menu(new BookKeeper(new ArrayList<>()));
 
         menu.doAction(1);
 
@@ -37,7 +38,7 @@ class MenuTest {
     void shouldCheckIfMenuListIsDisplayedAndIfInvalidNumberIsEnteredDisplayInvalidMessage() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Menu menu=new Menu();
+        Menu menu=new Menu(new BookKeeper(new ArrayList<>()));
 
         menu.doAction(22);
 
