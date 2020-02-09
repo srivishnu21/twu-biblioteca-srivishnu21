@@ -20,7 +20,10 @@ public class BookKeeper {
     public void checkOutBook(String bookName) {
         displayListOfBooksAvailable();
         Book book = getBook(bookName);
-        bookCheckedOutList.put(book, Boolean.TRUE);
+        if (book != null) {
+            bookCheckedOutList.put(book, Boolean.TRUE);
+            printer.print("Thank you! Enjoy the book");
+        }
     }
 
     private Book getBook(String bookName) {
