@@ -35,6 +35,9 @@ public class Menu {
             printer.print("Please Enter the name of the book want to return");
             String bookName = "";
             bookKeeper.returnBook(bookName);
+        }
+        if (actionItem == 4) {
+            System.exit(0);
         } else printer.print("Invalid option.Please Enter correct option!");
     }
 
@@ -43,6 +46,7 @@ public class Menu {
         menuMap.put(1, "Display List of all books");
         menuMap.put(2, "Check out a book");
         menuMap.put(3, "Return a book");
+        menuMap.put(4, "Quit Application");
         return menuMap;
     }
 }
