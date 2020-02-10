@@ -15,7 +15,7 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         printer.print(displayWelcomeMessage());
-        menu.displayMenu();
+        menu.doAction();
 
     }
 

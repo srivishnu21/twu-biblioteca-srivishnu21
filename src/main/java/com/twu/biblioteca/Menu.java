@@ -21,27 +21,26 @@ public class Menu {
     }
 
     public void doAction() {
-        while (scanner.hasNextInt()){
+        displayMenu();
+        while (scanner.hasNextInt()) {
             int actionItem = scanner.nextInt();
             if (actionItem == 1) {
                 bookKeeper.displayListOfAllBooks();
-            }
-            else if (actionItem == 2) {
+            } else if (actionItem == 2) {
                 bookKeeper.displayListOfBooksAvailable();
                 printer.print("Please Enter the name of the book want to checkout");
                 scanner.nextLine();
                 String bookName = scanner.nextLine();
                 bookKeeper.checkOutBook(bookName);
-            }
-            else if (actionItem == 3) {
+            } else if (actionItem == 3) {
                 printer.print("Please Enter the name of the book want to return");
                 scanner.nextLine();
                 String bookName = scanner.nextLine();
                 bookKeeper.returnBook(bookName);
-            }
-            else if (actionItem == 4) {
+            } else if (actionItem == 4) {
                 System.exit(0);
             } else printer.print("Invalid option.Please Enter correct option!");
+            displayMenu();
         }
     }
 
