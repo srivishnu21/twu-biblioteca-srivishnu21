@@ -10,19 +10,6 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 class BibliotecaTest {
-    @Test
-    void shouldCheckTheListOfAllBooksPrinted() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
-                (new Book("book2", 2010, "xyz"))));
-        PrintStream mockedPrintStream = mock(PrintStream.class);
-        System.setOut(mockedPrintStream);
-
-        Biblioteca biblioteca = new Biblioteca(bookList);
-        biblioteca.displayListOfAllBooks();
-
-        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
-    }
-
 
     @Test
     void shouldDisplayListOfBooksAvailable() {
@@ -30,9 +17,9 @@ class BibliotecaTest {
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-
         Biblioteca biblioteca = new Biblioteca(bookList);
-        biblioteca.displayListOfAllBooks();
+
+        biblioteca.displayListOfBooks();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
@@ -43,28 +30,13 @@ class BibliotecaTest {
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-
         Biblioteca biblioteca = new Biblioteca(bookList);
-        biblioteca.checkOutBook("book1");
 
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
+        biblioteca.checkOutBook("book1");
+        biblioteca.displayListOfBooks();
+
+        verify(mockedPrintStream, times(1)).println("book2\t,\t2010\t,\txyz\n");
     }
-
-    @Test
-    void shouldCheckOutABookWhichIsNotInLibrary() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
-                (new Book("book2", 2010, "xyz"))));
-        PrintStream mockedPrintStream = mock(PrintStream.class);
-        System.setOut(mockedPrintStream);
-
-        Biblioteca biblioteca = new Biblioteca(bookList);
-        biblioteca.checkOutBook("book1");
-        biblioteca.checkOutBook("book1");
-
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
-        verify(mockedPrintStream, times(1)).println("Sorry, that book is not available.");
-    }
-
 
     @Test
     void shouldCheckOutABookIfItContainsThenDisplaySuccessAMessage() {
@@ -80,7 +52,22 @@ class BibliotecaTest {
     }
 
     @Test
-    void shouldNotCheckOutABookIfItIsNotContainsInLibraryThenDisplayUnSuccessAMessage() {
+    void shouldCheckOutABookWhichIsNotInLibrary() {
+        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+                (new Book("book2", 2010, "xyz"))));
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        Biblioteca biblioteca = new Biblioteca(bookList);
+
+        biblioteca.checkOutBook("book1");
+        biblioteca.checkOutBook("book1");
+
+        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
+        verify(mockedPrintStream, times(1)).println("Sorry, that book is not available.");
+    }
+
+    @Test
+    void shouldThrowAUnSuccessfulMessageWhenBookItIsNotInLibrary() {
         List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);

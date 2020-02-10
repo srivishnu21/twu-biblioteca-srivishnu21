@@ -22,9 +22,9 @@ public class Biblioteca {
         if (books.contains(bookToFind)) {
             checkedOutBooks.add(bookToFind);
             books.remove(bookToFind);
-            publishMessage(successCheckOutMessage);
+            publish(successCheckOutMessage);
         } else {
-            publishMessage(unSuccessCheckOutMessage);
+            publish(unSuccessCheckOutMessage);
         }
     }
 
@@ -33,25 +33,23 @@ public class Biblioteca {
         if (checkedOutBooks.contains(bookToReturn)) {
             books.add(bookToReturn);
             checkedOutBooks.remove(bookToReturn);
-            publishMessage(successReturnMessage);
+            publish(successReturnMessage);
         } else {
-            publishMessage(unSuccessReturnMessage);
+            publish(unSuccessReturnMessage);
         }
     }
 
-    public void publishMessage(String message) {
+    public void publish(String message) {
         Printer printer = new Printer();
         printer.print(message);
     }
 
-
-    public void displayListOfAllBooks() {
-        Printer printer = new Printer();
-        printer.print("Book Name\t\tYear Published\t\tAuthor Name");
+    public void displayListOfBooks() {
+        publish("Book Name\t\tYear Published\t\tAuthor Name");
         StringBuilder bookListBuilder = new StringBuilder();
         for (Book book : books) {
             bookListBuilder.append(book.toString()).append("\n");
         }
-        printer.print(bookListBuilder.toString());
+        publish(bookListBuilder.toString());
     }
 }

@@ -26,10 +26,10 @@ public class Menu {
             int actionItem = scanner.nextInt();
             switch (actionItem) {
                 case 1:
-                    biblioteca.displayListOfAllBooks();
+                    biblioteca.displayListOfBooks();
                     break;
                 case 2:
-                    biblioteca.displayListOfAllBooks();
+                    biblioteca.displayListOfBooks();
                     printer.print("Please Enter the name of the book want to checkout");
                     scanner.nextLine();
                     String bookToCheckOut = scanner.nextLine();
