@@ -39,11 +39,6 @@ public class Biblioteca {
         }
     }
 
-    public void publish(String message) {
-        Printer printer = new Printer();
-        printer.print(message);
-    }
-
     public void displayBookList() {
         publish("Book Name\t\tYear Published\t\tAuthor Name");
         StringBuilder bookListBuilder = new StringBuilder();
@@ -51,5 +46,10 @@ public class Biblioteca {
             bookListBuilder.append(book.toString()).append("\n");
         }
         publish(bookListBuilder.toString());
+    }
+
+    private void publish(String message) {
+        Printer printer = new Printer();
+        printer.print(message);
     }
 }
