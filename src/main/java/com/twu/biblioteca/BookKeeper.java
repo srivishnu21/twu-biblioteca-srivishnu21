@@ -18,10 +18,10 @@ public class BookKeeper {
     }
 
     public void checkOutBook(String bookName) {
-        Book book = findBookInBookInList(bookName);
-        if (book != null) {
-            checkedOutBooks.add(book);
-            books.remove(book);
+        Book bookToFind = new Book(bookName,-1,"");
+        if (books.contains(bookToFind)) {
+            checkedOutBooks.add(bookToFind);
+            books.remove(bookToFind);
             publishMessage(successCheckOutMessage);
         } else {
             publishMessage(unSuccessCheckOutMessage);
@@ -29,10 +29,10 @@ public class BookKeeper {
     }
 
     public void returnBook(String bookName) {
-        Book book = findBookInCheckedOutList(bookName);
-        if (book != null) {
-            books.add(book);
-            checkedOutBooks.remove(book);
+        Book bookToReturn = new Book(bookName,-1,"");
+        if (checkedOutBooks.contains(bookToReturn)) {
+            books.add(bookToReturn);
+            checkedOutBooks.remove(bookToReturn);
             publishMessage(successReturnMessage);
         } else {
             publishMessage(unSuccessReturnMessage);
@@ -44,25 +44,6 @@ public class BookKeeper {
         printer.print(message);
     }
 
-    private Book findBookInBookInList(String bookName) {
-        Book bookToFind = new Book(bookName);
-        for (Book book : books) {
-            if (book.equals(bookToFind)) {
-                return book;
-            }
-        }
-        return null;
-    }
-
-    private Book findBookInCheckedOutList(String bookName) {
-        Book bookToFind = new Book(bookName);
-        for (Book book : checkedOutBooks) {
-            if (book.equals(bookToFind)) {
-                return book;
-            }
-        }
-        return null;
-    }
 
     public void displayListOfAllBooks() {
         Printer printer = new Printer();

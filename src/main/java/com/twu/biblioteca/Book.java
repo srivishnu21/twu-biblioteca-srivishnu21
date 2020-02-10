@@ -13,11 +13,6 @@ public class Book {
         this.authorName = authorName;
     }
 
-    //TODO: two constructors?
-    public Book(String bookName) {
-        this.bookName = bookName;
-    }
-
     public String toString(){
         return bookName + "\t,\t" + yearPublished + "\t,\t" + authorName;
     }
