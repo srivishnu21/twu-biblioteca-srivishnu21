@@ -20,7 +20,7 @@ public class Menu {
         printer.print("Please Enter A Number");
     }
 
-    public void doAction() {
+    public void execute() {
         displayMenu();
         while (scanner.hasNextInt()) {
             //TODO: Get rid of if else ladder

@@ -18,15 +18,6 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         //TODO: extract as function and test
         printer.print(welcomeMessage);
-        //TODO: better name for doAction
-        menu.doAction();
+        menu.execute();
     }
-
-
-
-    //TODO: do you need a function for a message
-    static String displayWelcomeMessage() {
-        return "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
-    }
-
 }

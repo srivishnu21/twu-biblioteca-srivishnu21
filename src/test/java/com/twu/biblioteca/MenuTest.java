@@ -35,7 +35,7 @@ class MenuTest {
         System.setIn(in);
         Menu menu = new Menu(new BookKeeper(new ArrayList<>()));
 
-        menu.doAction();
+        menu.execute();
 
         verify(mockedPrintStream, times(1)).println("Book Name\t\tYear Published\t\tAuthor Name");
     }
@@ -48,7 +48,7 @@ class MenuTest {
         System.setIn(in);
         Menu menu = new Menu(new BookKeeper(new ArrayList<>()));
 
-        menu.doAction();
+        menu.execute();
 
         verify(mockedPrintStream, times(1)).println("Invalid option.Please Enter correct option!");
     }
@@ -64,7 +64,7 @@ class MenuTest {
         BookKeeper bookKeeper = new BookKeeper(bookList);
         Menu menu = new Menu(bookKeeper);
 
-        menu.doAction();
+        menu.execute();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
         verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
@@ -81,7 +81,7 @@ class MenuTest {
         BookKeeper bookKeeper = new BookKeeper(bookList);
         Menu menu = new Menu(bookKeeper);
 
-        menu.doAction();
+        menu.execute();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
         verify(mockedPrintStream, times(1)).println("Sorry, that book is not available");
@@ -98,7 +98,7 @@ class MenuTest {
         BookKeeper bookKeeper = new BookKeeper(bookList);
         Menu menu = new Menu(bookKeeper);
 
-        menu.doAction();
+        menu.execute();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
         verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
@@ -117,7 +117,7 @@ class MenuTest {
         BookKeeper bookKeeper = new BookKeeper(bookList);
         Menu menu = new Menu(bookKeeper);
 
-        menu.doAction();
+        menu.execute();
 
         verify(mockedPrintStream, times(1)).println("Please Enter the name of the book want to return");
         verify(mockedPrintStream, times(1)).println("That is not a valid book to return.");
