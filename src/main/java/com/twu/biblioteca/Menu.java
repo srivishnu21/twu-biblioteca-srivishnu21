@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -11,9 +13,11 @@ public class Menu {
     Printer printer = new Printer();
     Scanner scanner = new Scanner(System.in);
     private Biblioteca biblioteca;
+    private List<MenuItem> menuItemList;
 
     public Menu(Biblioteca biblioteca) {
         this.biblioteca = biblioteca;
+        menuItemList = new ArrayList<>();
     }
 
     public void displayMenu() {
@@ -63,5 +67,9 @@ public class Menu {
             displayMenu();
         }
 
+    }
+
+    private void addMenuItem() {
+        menuItemList.add(new DisplayList(1, biblioteca));
     }
 }
