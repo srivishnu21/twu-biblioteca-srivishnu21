@@ -23,26 +23,32 @@ public class Menu {
     public void execute() {
         displayMenu();
         while (scanner.hasNextInt()) {
-            //TODO: Get rid of if else ladder
             int actionItem = scanner.nextInt();
-            if (actionItem == 1) {
-                bookKeeper.displayListOfAllBooks();
-            } else if (actionItem == 2) {
-                bookKeeper.displayListOfBooksAvailable();
-                printer.print("Please Enter the name of the book want to checkout");
-                scanner.nextLine();
-                String bookName = scanner.nextLine();
-                bookKeeper.checkOutBook(bookName);
-            } else if (actionItem == 3) {
-                printer.print("Please Enter the name of the book want to return");
-                scanner.nextLine();
-                String bookName = scanner.nextLine();
-                bookKeeper.returnBook(bookName);
-            } else if (actionItem == 4) {
-                System.exit(0);
-            } else printer.print("Invalid option.Please Enter correct option!");
+            switch (actionItem) {
+                case 1:
+                    bookKeeper.displayListOfAllBooks();
+                    break;
+                case 2:
+                    bookKeeper.displayListOfBooksAvailable();
+                    printer.print("Please Enter the name of the book want to checkout");
+                    scanner.nextLine();
+                    String bookToCheckOut = scanner.nextLine();
+                    bookKeeper.checkOutBook(bookToCheckOut);
+                    break;
+                case 3:
+                    printer.print("Please Enter the name of the book want to return");
+                    scanner.nextLine();
+                    String bookToReturn = scanner.nextLine();
+                    bookKeeper.returnBook(bookToReturn);
+                    break;
+                case 4:
+                    System.exit(0);
+                    break;
+                default:
+                    printer.print("Invalid option.Please Enter correct option!");
+            }
             displayMenu();
         }
-    }
 
+    }
 }
