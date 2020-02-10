@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
-    Map<Integer, String> menuMap = getMenuMap();
     Printer printer = new Printer();
     private BookKeeper bookKeeper;
 
@@ -14,13 +13,15 @@ public class Menu {
 
     public void displayMenu() {
         printer.print("Menu options");
-        for (Integer integer : menuMap.keySet()) {
-            printer.printMenu(integer, menuMap.get(integer));
-        }
-        printer.print("Please Enter A Number");
+        printer.print("1. Display List of all books");
+        printer.print("2. Check out a book");
+        printer.print("3. Return a book");
+        printer.print("4. Quit Application");
     }
 
     public void doAction(int actionItem) {
+        displayMenu();
+        printer.print("Please Enter A Number");
         if (actionItem == 1) {
             printer.print("Book Name\t\tYear Published\t\tAuthor Name");
             bookKeeper.displayListOfAllBooks();
@@ -41,12 +42,4 @@ public class Menu {
         } else printer.print("Invalid option.Please Enter correct option!");
     }
 
-    private Map<Integer, String> getMenuMap() {
-        Map<Integer, String> menuMap = new HashMap<>();
-        menuMap.put(1, "Display List of all books");
-        menuMap.put(2, "Check out a book");
-        menuMap.put(3, "Return a book");
-        menuMap.put(4, "Quit Application");
-        return menuMap;
-    }
 }

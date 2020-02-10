@@ -20,11 +20,10 @@ class MenuTest {
         menu.displayMenu();
 
         verify(mockedPrintStream, times(1)).println("Menu options");
-        verify(mockedPrintStream, times(1)).println("1.  Display List of all books");
-        verify(mockedPrintStream, times(1)).println("2.  Check out a book");
-        verify(mockedPrintStream, times(1)).println("3.  Return a book");
-        verify(mockedPrintStream, times(1)).println("4.  Quit Application");
-        verify(mockedPrintStream, times(1)).println("Please Enter A Number");
+        verify(mockedPrintStream, times(1)).println("1. Display List of all books");
+        verify(mockedPrintStream, times(1)).println("2. Check out a book");
+        verify(mockedPrintStream, times(1)).println("3. Return a book");
+        verify(mockedPrintStream, times(1)).println("4. Quit Application");
     }
 
     @Test
