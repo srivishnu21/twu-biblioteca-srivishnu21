@@ -13,10 +13,12 @@ public class Book {
         this.authorName = authorName;
     }
 
+    //TODO: two constructors?
     public Book(String bookName) {
         this.bookName = bookName;
     }
 
+    //TODO: Missing unit tests for books
     public String toString(){
         return bookName + "\t,\t" + yearPublished + "\t,\t" + authorName;
     }
@@ -28,4 +30,7 @@ public class Book {
         Book book = (Book) o;
         return bookName.equals(book.bookName);
     }
+
+
+    //TODO: missing hashCode implementation
 }

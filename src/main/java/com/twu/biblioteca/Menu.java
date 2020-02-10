@@ -23,6 +23,7 @@ public class Menu {
     public void doAction() {
         displayMenu();
         while (scanner.hasNextInt()) {
+            //TODO: Get rid of if else ladder
             int actionItem = scanner.nextInt();
             if (actionItem == 1) {
                 bookKeeper.displayListOfAllBooks();

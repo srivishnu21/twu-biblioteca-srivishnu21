@@ -38,7 +38,7 @@ class BookKeeperTest {
     }
 
     @Test
-    void shouldCheckOutABook() {
+    void shouldCheckOutABookItIsInLibrary() {
         List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
@@ -52,7 +52,7 @@ class BookKeeperTest {
 
 
     @Test
-    void shouldCheckOutABookIfItContainsDisplaySuccessAMessage() {
+    void shouldCheckOutABookIfItContainsThenDisplaySuccessAMessage() {
         List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
@@ -65,7 +65,7 @@ class BookKeeperTest {
     }
 
     @Test
-    void shouldNotCheckOutABookIfItIsNotContainsDisplayUnSuccessAMessage() {
+    void shouldNotCheckOutABookIfItIsNotContainsInLibraryThenDisplayUnSuccessAMessage() {
         List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);

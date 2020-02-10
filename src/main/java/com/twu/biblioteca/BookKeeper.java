@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 public class BookKeeper {
-    Printer printer = new Printer();
+    Printer printer = new Printer(); // TODO: why bookkeeper has a printer
+    // TODO: bookList can be called books
     private List<Book> bookList;
-    private Map<Book, Boolean> bookCheckedOutList;
+    private Map<Book, Boolean> bookCheckedOutList; // TODO: checkedoutBooks
 
     public BookKeeper(List<Book> bookList) {
         this.bookList = bookList;
@@ -17,6 +18,7 @@ public class BookKeeper {
         }
     }
 
+    //TODO: doing two things
     public void checkOutBook(String bookName) {
         Book book = getBook(bookName);
         if (book != null) {
@@ -27,6 +29,7 @@ public class BookKeeper {
         }
     }
 
+    //TODO: doing two things
     public void returnBook(String bookName) {
         Book book = getBook(bookName);
         if (book != null) {
@@ -37,6 +40,8 @@ public class BookKeeper {
         }
     }
 
+    //TODO: getBook = findBook
+    //TODO: pay attention to naming
     private Book getBook(String bookName) {
         Book book = new Book(bookName);
         for (Book bookIterator : bookList) {
