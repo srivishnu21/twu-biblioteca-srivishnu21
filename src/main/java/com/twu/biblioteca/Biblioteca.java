@@ -3,7 +3,7 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookKeeper {
+public class Biblioteca {
     public final String successCheckOutMessage = "Thank you! Enjoy the book.";
     public final String unSuccessCheckOutMessage = "Sorry, that book is not available.";
     public final String successReturnMessage = "Thank you for returning the book.";
@@ -12,13 +12,13 @@ public class BookKeeper {
     private List<Book> books;
     private List<Book> checkedOutBooks;
 
-    public BookKeeper(List<Book> books) {
+    public Biblioteca(List<Book> books) {
         this.books = books;
         checkedOutBooks = new ArrayList<>();
     }
 
     public void checkOutBook(String bookName) {
-        Book bookToFind = new Book(bookName,-1,"");
+        Book bookToFind = new Book(bookName, -1, "");
         if (books.contains(bookToFind)) {
             checkedOutBooks.add(bookToFind);
             books.remove(bookToFind);
@@ -29,7 +29,7 @@ public class BookKeeper {
     }
 
     public void returnBook(String bookName) {
-        Book bookToReturn = new Book(bookName,-1,"");
+        Book bookToReturn = new Book(bookName, -1, "");
         if (checkedOutBooks.contains(bookToReturn)) {
             books.add(bookToReturn);
             checkedOutBooks.remove(bookToReturn);

@@ -12,9 +12,8 @@ public class BibliotecaApp {
             new Book("Wings of fire", 2005, "apj")));
     static String welcomeMessage = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
     static Printer printer = new Printer();
-    //TODO: better name for BookKeeper
-    static BookKeeper bookKeeper = new BookKeeper(bookList);
-    static Menu menu = new Menu(bookKeeper);
+    static Biblioteca biblioteca = new Biblioteca(bookList);
+    static Menu menu = new Menu(biblioteca);
 
     public static void main(String[] args) {
         printer.print(welcomeMessage);

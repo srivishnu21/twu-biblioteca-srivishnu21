@@ -16,7 +16,7 @@ class MenuTest {
     void shouldCheckIfDisplayMenuMethodDisplayEveryMenu() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Menu menu = new Menu(new BookKeeper(new ArrayList<>()));
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>()));
 
         menu.displayMenu();
 
@@ -34,7 +34,7 @@ class MenuTest {
         System.setOut(mockedPrintStream);
         ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
         System.setIn(in);
-        Menu menu = new Menu(new BookKeeper(new ArrayList<>()));
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>()));
 
         menu.execute();
 
@@ -47,7 +47,7 @@ class MenuTest {
         System.setOut(mockedPrintStream);
         ByteArrayInputStream in = new ByteArrayInputStream("22".getBytes());
         System.setIn(in);
-        Menu menu = new Menu(new BookKeeper(new ArrayList<>()));
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>()));
 
         menu.execute();
 
@@ -62,8 +62,8 @@ class MenuTest {
         System.setOut(mockedPrintStream);
         ByteArrayInputStream in = new ByteArrayInputStream("2\nbook1".getBytes());
         System.setIn(in);
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        Menu menu = new Menu(bookKeeper);
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        Menu menu = new Menu(biblioteca);
 
         menu.execute();
 
@@ -78,8 +78,8 @@ class MenuTest {
         System.setOut(mockedPrintStream);
         ByteArrayInputStream in = new ByteArrayInputStream("2\njhdx".getBytes());
         System.setIn(in);
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        Menu menu = new Menu(bookKeeper);
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        Menu menu = new Menu(biblioteca);
 
         menu.execute();
 
@@ -95,8 +95,8 @@ class MenuTest {
         System.setOut(mockedPrintStream);
         ByteArrayInputStream in = new ByteArrayInputStream("2\nbook1\n3\nbook1".getBytes());
         System.setIn(in);
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        Menu menu = new Menu(bookKeeper);
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        Menu menu = new Menu(biblioteca);
 
         menu.execute();
 
@@ -114,8 +114,8 @@ class MenuTest {
         System.setOut(mockedPrintStream);
         ByteArrayInputStream in = new ByteArrayInputStream("3\nbocbk".getBytes());
         System.setIn(in);
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        Menu menu = new Menu(bookKeeper);
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        Menu menu = new Menu(biblioteca);
 
         menu.execute();
 

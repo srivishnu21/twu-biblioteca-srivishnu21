@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-class BookKeeperTest {
+class BibliotecaTest {
     @Test
     void shouldCheckTheListOfAllBooksPrinted() {
         List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
@@ -17,8 +17,8 @@ class BookKeeperTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        bookKeeper.displayListOfAllBooks();
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        biblioteca.displayListOfAllBooks();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
@@ -31,8 +31,8 @@ class BookKeeperTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        bookKeeper.displayListOfAllBooks();
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        biblioteca.displayListOfAllBooks();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
@@ -44,8 +44,8 @@ class BookKeeperTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        bookKeeper.checkOutBook("book1");
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        biblioteca.checkOutBook("book1");
 
         verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
     }
@@ -57,9 +57,9 @@ class BookKeeperTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        bookKeeper.checkOutBook("book1");
-        bookKeeper.checkOutBook("book1");
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        biblioteca.checkOutBook("book1");
+        biblioteca.checkOutBook("book1");
 
         verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
         verify(mockedPrintStream, times(1)).println("Sorry, that book is not available.");
@@ -73,8 +73,8 @@ class BookKeeperTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        bookKeeper.checkOutBook("book2");
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        biblioteca.checkOutBook("book2");
 
         verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
     }
@@ -86,8 +86,8 @@ class BookKeeperTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        bookKeeper.checkOutBook("hffhtdt");
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        biblioteca.checkOutBook("hffhtdt");
 
         verify(mockedPrintStream, times(1)).println("Sorry, that book is not available.");
     }
@@ -99,9 +99,9 @@ class BookKeeperTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        bookKeeper.checkOutBook("book1");
-        bookKeeper.returnBook("book1");
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        biblioteca.checkOutBook("book1");
+        biblioteca.returnBook("book1");
 
 
         verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
@@ -115,8 +115,8 @@ class BookKeeperTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        bookKeeper.returnBook("bsgb");
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        biblioteca.returnBook("bsgb");
 
         verify(mockedPrintStream, times(1)).println("That is not a valid book to return.");
     }

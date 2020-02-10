@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Menu {
     Printer printer = new Printer();
     Scanner scanner = new Scanner(System.in);
-    private BookKeeper bookKeeper;
+    private Biblioteca biblioteca;
 
-    public Menu(BookKeeper bookKeeper) {
-        this.bookKeeper = bookKeeper;
+    public Menu(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
     }
 
     public void displayMenu() {
@@ -26,20 +26,20 @@ public class Menu {
             int actionItem = scanner.nextInt();
             switch (actionItem) {
                 case 1:
-                    bookKeeper.displayListOfAllBooks();
+                    biblioteca.displayListOfAllBooks();
                     break;
                 case 2:
-                    bookKeeper.displayListOfAllBooks();
+                    biblioteca.displayListOfAllBooks();
                     printer.print("Please Enter the name of the book want to checkout");
                     scanner.nextLine();
                     String bookToCheckOut = scanner.nextLine();
-                    bookKeeper.checkOutBook(bookToCheckOut);
+                    biblioteca.checkOutBook(bookToCheckOut);
                     break;
                 case 3:
                     printer.print("Please Enter the name of the book want to return");
                     scanner.nextLine();
                     String bookToReturn = scanner.nextLine();
-                    bookKeeper.returnBook(bookToReturn);
+                    biblioteca.returnBook(bookToReturn);
                     break;
                 case 4:
                     System.exit(0);
