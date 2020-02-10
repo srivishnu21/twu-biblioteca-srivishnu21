@@ -18,7 +18,6 @@ public class Book {
         this.bookName = bookName;
     }
 
-    //TODO: Missing unit tests for books
     public String toString(){
         return bookName + "\t,\t" + yearPublished + "\t,\t" + authorName;
     }
@@ -31,6 +30,8 @@ public class Book {
         return bookName.equals(book.bookName);
     }
 
-
-    //TODO: missing hashCode implementation
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookName, yearPublished, authorName);
+    }
 }
