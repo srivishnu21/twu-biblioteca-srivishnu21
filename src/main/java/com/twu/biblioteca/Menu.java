@@ -6,18 +6,25 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public final String successCheckOutMessage = "Thank you! Enjoy the book.";
-    public final String unSuccessCheckOutMessage = "Sorry, that book is not available.";
     public final String successReturnMessage = "Thank you for returning the book.";
     public final String unSuccessReturnMessage = "That is not a valid book to return.";
     Printer printer = new Printer();
-    Scanner scanner = new Scanner(System.in);
+    Reader reader;
     private Biblioteca biblioteca;
     private List<MenuItem> menuItemList;
 
     public Menu(Biblioteca biblioteca) {
         this.biblioteca = biblioteca;
         menuItemList = new ArrayList<>();
+        addMenuItem();
+    }
+
+    public Menu(Biblioteca biblioteca, Reader reader) {
+
+        this.biblioteca = biblioteca;
+        this.reader = reader;
+        menuItemList = new ArrayList<MenuItem>();
+        addMenuItem();
     }
 
     public void displayMenu() {
@@ -31,45 +38,18 @@ public class Menu {
 
     public void execute() {
         displayMenu();
-        while (scanner.hasNextInt()) {
-            int actionItem = scanner.nextInt();
-            switch (actionItem) {
-                case 1:
-                    biblioteca.displayBookList();
-                    break;
-                case 2:
-                    biblioteca.displayBookList();
-                    printer.print("Please Enter the name of the book want to checkout");
-                    scanner.nextLine();
-                    String bookToCheckOut = scanner.nextLine();
-                    if (biblioteca.checkOutBook(bookToCheckOut)) {
-                        printer.print(successCheckOutMessage);
-                        break;
-                    }
-                    printer.print(unSuccessCheckOutMessage);
-                    break;
-                case 3:
-                    printer.print("Please Enter the name of the book want to return");
-                    scanner.nextLine();
-                    String bookToReturn = scanner.nextLine();
-                    if (biblioteca.returnBook(bookToReturn)) {
-                        printer.print(successReturnMessage);
-                        break;
-                    }
-                    printer.print(unSuccessReturnMessage);
-                    break;
-                case 4:
-                    System.exit(0);
-                    break;
-                default:
-                    printer.print("Invalid option.Please Enter correct option!");
+        int actionItem = reader.getInt();
+        System.out.println(actionItem);
+        for (MenuItem menuItem : menuItemList) {
+            if (actionItem == menuItem.getActionNumber()) {
+                menuItem.execute();
             }
-            displayMenu();
         }
 
     }
 
     private void addMenuItem() {
         menuItemList.add(new DisplayList(1, biblioteca));
+        menuItemList.add(new checkOut(2, biblioteca,reader));
     }
 }

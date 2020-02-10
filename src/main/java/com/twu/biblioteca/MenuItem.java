@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 abstract class MenuItem {
-    int actionNumber;
+   private int actionNumber;
     Biblioteca biblioteca;
 
     public MenuItem(int actionNumber, Biblioteca biblioteca) {
@@ -11,5 +11,5 @@ abstract class MenuItem {
 
     abstract int getActionNumber();
 
-    abstract void action();
+    abstract void execute();
 }

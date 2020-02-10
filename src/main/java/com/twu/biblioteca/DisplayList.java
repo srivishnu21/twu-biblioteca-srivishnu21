@@ -3,7 +3,7 @@ package com.twu.biblioteca;
 public class DisplayList extends MenuItem {
 
     Printer printer = new Printer();
-    int actionNumber;
+    private int actionNumber;
 
     public DisplayList(int actionNumber, Biblioteca biblioteca) {
         super(1, biblioteca);
@@ -16,8 +16,7 @@ public class DisplayList extends MenuItem {
     }
 
     @Override
-    void action() {
-        printer.print("Book Name\t\tYear Published\t\tAuthor Name");
+    void execute() {
         biblioteca.displayBookList();
     }
 }
