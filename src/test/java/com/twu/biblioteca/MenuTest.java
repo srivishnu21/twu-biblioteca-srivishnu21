@@ -24,6 +24,7 @@ class MenuTest {
         verify(mockedPrintStream, times(1)).println("1. Display List of all books");
         verify(mockedPrintStream, times(1)).println("2. Check out a book");
         verify(mockedPrintStream, times(1)).println("3. Return a book");
+        verify(mockedPrintStream, times(1)).println("4. Quit Application");
         verify(mockedPrintStream, times(1)).println("Please Enter A Number");
     }
 
@@ -66,8 +67,7 @@ class MenuTest {
 
         menu.execute();
 
-        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
+        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
     }
 
     @Test
@@ -84,7 +84,7 @@ class MenuTest {
         menu.execute();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
-        verify(mockedPrintStream, times(1)).println("Sorry, that book is not available");
+        verify(mockedPrintStream, times(1)).println("Sorry, that book is not available.");
     }
 
     @Test
@@ -101,9 +101,9 @@ class MenuTest {
         menu.execute();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
+        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
         verify(mockedPrintStream, times(1)).println("Please Enter the name of the book want to return");
-        verify(mockedPrintStream, times(1)).println("Thank you for returning the book");
+        verify(mockedPrintStream, times(1)).println("Thank you for returning the book.");
     }
 
     @Test
@@ -119,7 +119,7 @@ class MenuTest {
 
         menu.execute();
 
-        verify(mockedPrintStream, times(1)).println("Please Enter the name of the book want to return");
+
         verify(mockedPrintStream, times(1)).println("That is not a valid book to return.");
     }
 

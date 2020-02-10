@@ -1,8 +1,7 @@
 package com.twu.biblioteca;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class BookKeeper {
     public final String successCheckOutMessage = "Thank you! Enjoy the book.";
@@ -11,20 +10,18 @@ public class BookKeeper {
     public final String unSuccessReturnMessage = "That is not a valid book to return.";
 
     private List<Book> books;
-    private Map<Book, Boolean> bookCheckedOutList; // TODO: checkedoutBooks
+    private List<Book> checkedOutBooks;
 
     public BookKeeper(List<Book> books) {
         this.books = books;
-        bookCheckedOutList = new HashMap<>();
-        for (Book book : this.books) {
-            bookCheckedOutList.put(book, Boolean.FALSE);
-        }
+        checkedOutBooks = new ArrayList<>();
     }
 
     public void checkOutBook(String bookName) {
-        Book book = findBook(bookName);
+        Book book = findBookInBookInList(bookName);
         if (book != null) {
-            bookCheckedOutList.put(book, Boolean.TRUE);
+            checkedOutBooks.add(book);
+            books.remove(book);
             publishMessage(successCheckOutMessage);
         } else {
             publishMessage(unSuccessCheckOutMessage);
@@ -32,9 +29,10 @@ public class BookKeeper {
     }
 
     public void returnBook(String bookName) {
-        Book book = findBook(bookName);
+        Book book = findBookInCheckedOutList(bookName);
         if (book != null) {
-            bookCheckedOutList.put(book, Boolean.FALSE);
+            books.add(book);
+            checkedOutBooks.remove(book);
             publishMessage(successReturnMessage);
         } else {
             publishMessage(unSuccessReturnMessage);
@@ -46,7 +44,7 @@ public class BookKeeper {
         printer.print(message);
     }
 
-    private Book findBook(String bookName) {
+    private Book findBookInBookInList(String bookName) {
         Book bookToFind = new Book(bookName);
         for (Book book : books) {
             if (book.equals(bookToFind)) {
@@ -56,14 +54,14 @@ public class BookKeeper {
         return null;
     }
 
-    void displayListOfBooksAvailable() {
-        Printer printer = new Printer();
-        StringBuilder bookListBuilder = new StringBuilder();
-        for (Book book : books) {
-            if (!bookCheckedOutList.get(book))
-                bookListBuilder.append(book.toString()).append("\n");
+    private Book findBookInCheckedOutList(String bookName) {
+        Book bookToFind = new Book(bookName);
+        for (Book book : checkedOutBooks) {
+            if (book.equals(bookToFind)) {
+                return book;
+            }
         }
-        printer.print(bookListBuilder.toString());
+        return null;
     }
 
     public void displayListOfAllBooks() {

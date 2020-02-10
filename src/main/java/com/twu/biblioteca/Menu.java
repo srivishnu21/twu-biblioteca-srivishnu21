@@ -29,7 +29,7 @@ public class Menu {
                     bookKeeper.displayListOfAllBooks();
                     break;
                 case 2:
-                    bookKeeper.displayListOfBooksAvailable();
+                    bookKeeper.displayListOfAllBooks();
                     printer.print("Please Enter the name of the book want to checkout");
                     scanner.nextLine();
                     String bookToCheckOut = scanner.nextLine();

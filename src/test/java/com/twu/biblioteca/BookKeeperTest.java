@@ -32,7 +32,7 @@ class BookKeeperTest {
         System.setOut(mockedPrintStream);
 
         BookKeeper bookKeeper = new BookKeeper(bookList);
-        bookKeeper.displayListOfBooksAvailable();
+        bookKeeper.displayListOfAllBooks();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
@@ -48,6 +48,21 @@ class BookKeeperTest {
         bookKeeper.checkOutBook("book1");
 
         verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
+    }
+
+    @Test
+    void shouldCheckOutABookWhichIsNotInLibrary() {
+        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+                (new Book("book2", 2010, "xyz"))));
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+
+        BookKeeper bookKeeper = new BookKeeper(bookList);
+        bookKeeper.checkOutBook("book1");
+        bookKeeper.checkOutBook("book1");
+
+        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
+        verify(mockedPrintStream, times(1)).println("Sorry, that book is not available.");
     }
 
 
@@ -75,24 +90,6 @@ class BookKeeperTest {
         bookKeeper.checkOutBook("hffhtdt");
 
         verify(mockedPrintStream, times(1)).println("Sorry, that book is not available.");
-    }
-
-    @Test
-    void shouldAbleToReturnABookBelongsToThisLibrary() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
-                (new Book("book2", 2010, "xyz"))));
-        PrintStream mockedPrintStream = mock(PrintStream.class);
-        System.setOut(mockedPrintStream);
-
-        BookKeeper bookKeeper = new BookKeeper(bookList);
-        bookKeeper.checkOutBook("book1");
-        bookKeeper.displayListOfBooksAvailable();
-        bookKeeper.returnBook("book1");
-        bookKeeper.displayListOfBooksAvailable();
-
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
-        verify(mockedPrintStream, times(1)).println("book2\t,\t2010\t,\txyz\n");
-        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
 
     @Test
