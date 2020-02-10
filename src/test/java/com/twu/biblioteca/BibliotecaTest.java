@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class BibliotecaTest {
@@ -44,11 +46,9 @@ class BibliotecaTest {
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-
         Biblioteca biblioteca = new Biblioteca(bookList);
-        biblioteca.checkOutBook("book2");
 
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
+        assertTrue(biblioteca.checkOutBook("book2"));
     }
 
     @Test
@@ -62,8 +62,8 @@ class BibliotecaTest {
         biblioteca.checkOutBook("book1");
         biblioteca.checkOutBook("book1");
 
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
-        verify(mockedPrintStream, times(1)).println("Sorry, that book is not available.");
+        assertTrue(biblioteca.checkOutBook("book2"));
+        assertFalse(biblioteca.checkOutBook("book2"));
     }
 
     @Test
@@ -74,9 +74,8 @@ class BibliotecaTest {
         System.setOut(mockedPrintStream);
 
         Biblioteca biblioteca = new Biblioteca(bookList);
-        biblioteca.checkOutBook("hffhtdt");
 
-        verify(mockedPrintStream, times(1)).println("Sorry, that book is not available.");
+        assertFalse(biblioteca.checkOutBook("hffhtdt"));
     }
 
     @Test
@@ -87,12 +86,9 @@ class BibliotecaTest {
         System.setOut(mockedPrintStream);
 
         Biblioteca biblioteca = new Biblioteca(bookList);
-        biblioteca.checkOutBook("book1");
-        biblioteca.returnBook("book1");
 
-
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
-        verify(mockedPrintStream, times(1)).println("Thank you for returning the book.");
+        assertTrue(biblioteca.checkOutBook("book1"));
+        assertTrue(biblioteca.returnBook("book1"));
     }
 
     @Test
@@ -105,6 +101,6 @@ class BibliotecaTest {
         Biblioteca biblioteca = new Biblioteca(bookList);
         biblioteca.returnBook("bsgb");
 
-        verify(mockedPrintStream, times(1)).println("That is not a valid book to return.");
+        assertFalse(biblioteca.checkOutBook("hffhtdt"));
     }
 }

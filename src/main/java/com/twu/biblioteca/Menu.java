@@ -3,6 +3,11 @@ package com.twu.biblioteca;
 import java.util.Scanner;
 
 public class Menu {
+
+    public final String successCheckOutMessage = "Thank you! Enjoy the book.";
+    public final String unSuccessCheckOutMessage = "Sorry, that book is not available.";
+    public final String successReturnMessage = "Thank you for returning the book.";
+    public final String unSuccessReturnMessage = "That is not a valid book to return.";
     Printer printer = new Printer();
     Scanner scanner = new Scanner(System.in);
     private Biblioteca biblioteca;
@@ -33,13 +38,21 @@ public class Menu {
                     printer.print("Please Enter the name of the book want to checkout");
                     scanner.nextLine();
                     String bookToCheckOut = scanner.nextLine();
-                    biblioteca.checkOutBook(bookToCheckOut);
+                    if (biblioteca.checkOutBook(bookToCheckOut)) {
+                        printer.print(successCheckOutMessage);
+                        break;
+                    }
+                    printer.print(unSuccessCheckOutMessage);
                     break;
                 case 3:
                     printer.print("Please Enter the name of the book want to return");
                     scanner.nextLine();
                     String bookToReturn = scanner.nextLine();
-                    biblioteca.returnBook(bookToReturn);
+                    if (biblioteca.returnBook(bookToReturn)) {
+                        printer.print(successReturnMessage);
+                        break;
+                    }
+                    printer.print(unSuccessReturnMessage);
                     break;
                 case 4:
                     System.exit(0);
