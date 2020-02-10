@@ -19,7 +19,7 @@ class BibliotecaTest {
         System.setOut(mockedPrintStream);
         Biblioteca biblioteca = new Biblioteca(bookList);
 
-        biblioteca.displayListOfBooks();
+        biblioteca.displayBookList();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
@@ -33,7 +33,7 @@ class BibliotecaTest {
         Biblioteca biblioteca = new Biblioteca(bookList);
 
         biblioteca.checkOutBook("book1");
-        biblioteca.displayListOfBooks();
+        biblioteca.displayBookList();
 
         verify(mockedPrintStream, times(1)).println("book2\t,\t2010\t,\txyz\n");
     }

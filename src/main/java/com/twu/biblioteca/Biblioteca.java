@@ -44,7 +44,7 @@ public class Biblioteca {
         printer.print(message);
     }
 
-    public void displayListOfBooks() {
+    public void displayBookList() {
         publish("Book Name\t\tYear Published\t\tAuthor Name");
         StringBuilder bookListBuilder = new StringBuilder();
         for (Book book : books) {

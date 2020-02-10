@@ -13,7 +13,7 @@ import static org.mockito.Mockito.*;
 class MenuTest {
 
     @Test
-    void shouldCheckIfDisplayMenuMethodDisplayEveryMenu() {
+    void shouldCheckIfDisplayMenuMethodDisplaysEveryMenu() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
         Menu menu = new Menu(new Biblioteca(new ArrayList<>()));
@@ -29,7 +29,7 @@ class MenuTest {
     }
 
     @Test
-    void shouldCheckIfMenuListIsDisplayedAndListOfBooksIsDisplayed() {
+    void shouldCheckIfListOfBooksIsDisplayed() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
         ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
@@ -42,7 +42,7 @@ class MenuTest {
     }
 
     @Test
-    void shouldCheckIfMenuListIsDisplayedAndIfInvalidNumberIsEnteredDisplayInvalidMessage() {
+    void shouldCheckIfInvalidNumberIsEnteredDisplayInvalidMessage() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
         ByteArrayInputStream in = new ByteArrayInputStream("22".getBytes());
@@ -55,7 +55,7 @@ class MenuTest {
     }
 
     @Test
-    void shouldCheckIfMenuListIsDisplayedAndCheckOutABook() {
+    void shouldCheckUserCanCheckOutABook() {
         List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
@@ -100,9 +100,7 @@ class MenuTest {
 
         menu.execute();
 
-        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
         verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
-        verify(mockedPrintStream, times(1)).println("Please Enter the name of the book want to return");
         verify(mockedPrintStream, times(1)).println("Thank you for returning the book.");
     }
 
@@ -118,7 +116,6 @@ class MenuTest {
         Menu menu = new Menu(biblioteca);
 
         menu.execute();
-
 
         verify(mockedPrintStream, times(1)).println("That is not a valid book to return.");
     }
