@@ -71,7 +71,43 @@ class MenuTest {
     }
 
     @Test
-    void shouldCheckIfMenuListIsDisplayedAndReturn() {
+    void shouldNotCheckOutABookIfItIsInvalid() {
+        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+                (new Book("book2", 2010, "xyz"))));
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        ByteArrayInputStream in = new ByteArrayInputStream("2\njhdx".getBytes());
+        System.setIn(in);
+        BookKeeper bookKeeper = new BookKeeper(bookList);
+        Menu menu = new Menu(bookKeeper);
+
+        menu.doAction();
+
+        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
+        verify(mockedPrintStream, times(1)).println("Sorry, that book is not available");
+    }
+
+    @Test
+    void shouldReturnABookIfItIsValid() {
+        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+                (new Book("book2", 2010, "xyz"))));
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        ByteArrayInputStream in = new ByteArrayInputStream("2\nbook1\n3\nbook1".getBytes());
+        System.setIn(in);
+        BookKeeper bookKeeper = new BookKeeper(bookList);
+        Menu menu = new Menu(bookKeeper);
+
+        menu.doAction();
+
+        verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
+        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
+        verify(mockedPrintStream, times(1)).println("Please Enter the name of the book want to return");
+        verify(mockedPrintStream, times(1)).println("Thank you for returning the book");
+    }
+
+    @Test
+    void shouldNotReturnABookIfItIsNotValid() {
         List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
