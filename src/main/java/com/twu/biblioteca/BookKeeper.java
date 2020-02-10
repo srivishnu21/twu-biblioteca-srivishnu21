@@ -54,10 +54,10 @@ public class BookKeeper {
                 bookListBuilder.append(book.toString()).append("\n");
         }
         printer.print(bookListBuilder.toString());
-        printer.print("Please enter the name of book want to checkout");
     }
 
     public void displayListOfAllBooks() {
+        printer.print("Book Name\t\tYear Published\t\tAuthor Name");
         StringBuilder bookListBuilder = new StringBuilder();
         for (Book book : bookList) {
             bookListBuilder.append(book.toString()).append("\n");

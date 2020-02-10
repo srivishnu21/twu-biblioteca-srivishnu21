@@ -1,10 +1,10 @@
 package com.twu.biblioteca;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Scanner;
 
 public class Menu {
     Printer printer = new Printer();
+    Scanner scanner = new Scanner(System.in);
     private BookKeeper bookKeeper;
 
     public Menu(BookKeeper bookKeeper) {
@@ -17,29 +17,32 @@ public class Menu {
         printer.print("2. Check out a book");
         printer.print("3. Return a book");
         printer.print("4. Quit Application");
+        printer.print("Please Enter A Number");
     }
 
-    public void doAction(int actionItem) {
-        displayMenu();
-        printer.print("Please Enter A Number");
-        if (actionItem == 1) {
-            printer.print("Book Name\t\tYear Published\t\tAuthor Name");
-            bookKeeper.displayListOfAllBooks();
+    public void doAction() {
+        while (scanner.hasNextInt()){
+            int actionItem = scanner.nextInt();
+            if (actionItem == 1) {
+                bookKeeper.displayListOfAllBooks();
+            }
+            else if (actionItem == 2) {
+                bookKeeper.displayListOfBooksAvailable();
+                printer.print("Please Enter the name of the book want to checkout");
+                scanner.nextLine();
+                String bookName = scanner.nextLine();
+                bookKeeper.checkOutBook(bookName);
+            }
+            else if (actionItem == 3) {
+                printer.print("Please Enter the name of the book want to return");
+                scanner.nextLine();
+                String bookName = scanner.nextLine();
+                bookKeeper.returnBook(bookName);
+            }
+            else if (actionItem == 4) {
+                System.exit(0);
+            } else printer.print("Invalid option.Please Enter correct option!");
         }
-        if (actionItem == 2) {
-            bookKeeper.displayListOfBooksAvailable();
-            printer.print("Please Enter the name of the book want to checkout");
-            String bookName = "";
-            bookKeeper.checkOutBook(bookName);
-        }
-        if (actionItem == 3) {
-            printer.print("Please Enter the name of the book want to return");
-            String bookName = "";
-            bookKeeper.returnBook(bookName);
-        }
-        if (actionItem == 4) {
-            System.exit(0);
-        } else printer.print("Invalid option.Please Enter correct option!");
     }
 
 }
