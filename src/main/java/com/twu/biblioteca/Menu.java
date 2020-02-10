@@ -2,28 +2,19 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Menu {
 
-    public final String successReturnMessage = "Thank you for returning the book.";
-    public final String unSuccessReturnMessage = "That is not a valid book to return.";
     Printer printer = new Printer();
     Reader reader;
     private Biblioteca biblioteca;
     private List<MenuItem> menuItemList;
 
-    public Menu(Biblioteca biblioteca) {
-        this.biblioteca = biblioteca;
-        menuItemList = new ArrayList<>();
-        addMenuItem();
-    }
-
     public Menu(Biblioteca biblioteca, Reader reader) {
 
         this.biblioteca = biblioteca;
         this.reader = reader;
-        menuItemList = new ArrayList<MenuItem>();
+        menuItemList = new ArrayList<>();
         addMenuItem();
     }
 
@@ -37,19 +28,28 @@ public class Menu {
     }
 
     public void execute() {
-        displayMenu();
-        int actionItem = reader.getInt();
-        System.out.println(actionItem);
-        for (MenuItem menuItem : menuItemList) {
-            if (actionItem == menuItem.getActionNumber()) {
-                menuItem.execute();
+        while (reader.hasNext()) {
+            displayMenu();
+            boolean flag = false;
+            int actionItem = reader.getInt();
+            for (MenuItem menuItem : menuItemList) {
+                if (actionItem == menuItem.getActionNumber()) {
+                    menuItem.execute();
+                    flag = true;
+                }
             }
+            if (!flag) {
+                printer.print("Invalid option.Please Enter correct option!");
+            }
+            displayMenu();
         }
 
     }
 
     private void addMenuItem() {
         menuItemList.add(new DisplayList(1, biblioteca));
-        menuItemList.add(new checkOut(2, biblioteca,reader));
+        menuItemList.add(new checkOut(2, biblioteca, reader));
+        menuItemList.add(new Return(3, biblioteca, reader));
+        menuItemList.add(new ExitApplication(4, biblioteca));
     }
 }

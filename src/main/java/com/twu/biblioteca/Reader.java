@@ -12,4 +12,8 @@ public class Reader {
     public String getString() {
         return scanner.nextLine();
     }
+
+    public boolean hasNext(){
+        return scanner.hasNext();
+    }
 }

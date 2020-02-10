@@ -2,7 +2,6 @@ package com.twu.biblioteca;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +15,7 @@ class BibliotecaAppTest {
     void shouldCheckIfDisplayWelcomeMessageIsPrintedOrNot() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(new Menu(new Biblioteca(new ArrayList<>())));
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(new Menu(new Biblioteca(new ArrayList<>()), new Reader()));
 
         bibliotecaApp.main(null);
 
@@ -32,10 +31,11 @@ class BibliotecaAppTest {
                 new Book("Wings of fire", 2005, "apj")));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
-        System.setIn(in);
+        Reader reader = mock(Reader.class);
+        when(reader.getInt()).thenReturn(1);
+        doReturn(true, false).when(reader).hasNext();
         Biblioteca biblioteca = new Biblioteca(bookList);
-        Menu menu = new Menu(biblioteca);
+        Menu menu = new Menu(biblioteca, reader);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(menu);
 
         bibliotecaApp.main(null);

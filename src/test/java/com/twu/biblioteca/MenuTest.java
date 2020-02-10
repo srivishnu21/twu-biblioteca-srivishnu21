@@ -2,7 +2,6 @@ package com.twu.biblioteca;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +15,7 @@ class MenuTest {
     void shouldCheckIfDisplayMenuMethodDisplaysEveryMenu() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Menu menu = new Menu(new Biblioteca(new ArrayList<>()));
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>()), new Reader());
 
         menu.displayMenu();
 
@@ -34,6 +33,7 @@ class MenuTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
         when(reader.getInt()).thenReturn(1);
+        doReturn(true, false).when(reader).hasNext();
         Menu menu = new Menu(new Biblioteca(new ArrayList<>()), reader);
 
         menu.execute();
@@ -45,9 +45,10 @@ class MenuTest {
     void shouldCheckIfInvalidNumberIsEnteredDisplayInvalidMessage() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        ByteArrayInputStream in = new ByteArrayInputStream("22".getBytes());
-        System.setIn(in);
-        Menu menu = new Menu(new Biblioteca(new ArrayList<>()));
+        Reader reader = mock(Reader.class);
+        doReturn(22).when(reader).getInt();
+        doReturn(true, false).when(reader).hasNext();
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>()), reader);
 
         menu.execute();
 
@@ -61,6 +62,7 @@ class MenuTest {
         Reader reader = mock(Reader.class);
         doReturn(2).when(reader).getInt();
         doReturn("book1").when(reader).getString();
+        doReturn(true, false).when(reader).hasNext();
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
         Biblioteca biblioteca = new Biblioteca(bookList);
@@ -80,6 +82,7 @@ class MenuTest {
         Reader reader = mock(Reader.class);
         doReturn(2).when(reader).getInt();
         doReturn("jfugj").when(reader).getString();
+        doReturn(true, false).when(reader).hasNext();
         Biblioteca biblioteca = new Biblioteca(bookList);
         Menu menu = new Menu(biblioteca, reader);
 
@@ -95,10 +98,12 @@ class MenuTest {
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        ByteArrayInputStream in = new ByteArrayInputStream("2\nbook1\n3\nbook1".getBytes());
-        System.setIn(in);
+        Reader reader = mock(Reader.class);
+        doReturn(2, 3).when(reader).getInt();
+        doReturn("book1", "book1").when(reader).getString();
+        doReturn(true, true, false).when(reader).hasNext();
         Biblioteca biblioteca = new Biblioteca(bookList);
-        Menu menu = new Menu(biblioteca);
+        Menu menu = new Menu(biblioteca, reader);
 
         menu.execute();
 
@@ -112,10 +117,12 @@ class MenuTest {
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        ByteArrayInputStream in = new ByteArrayInputStream("3\nbocbk".getBytes());
-        System.setIn(in);
+        Reader reader = mock(Reader.class);
+        doReturn(3).when(reader).getInt();
+        doReturn("book1").when(reader).getString();
+        doReturn(true, false).when(reader).hasNext();
         Biblioteca biblioteca = new Biblioteca(bookList);
-        Menu menu = new Menu(biblioteca);
+        Menu menu = new Menu(biblioteca, reader);
 
         menu.execute();
 
