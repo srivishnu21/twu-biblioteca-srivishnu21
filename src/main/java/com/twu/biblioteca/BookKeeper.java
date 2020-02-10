@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 public class BookKeeper {
-    Printer printer = new Printer(); // TODO: why bookkeeper has a printer
+    public final String successCheckOutMessage = "Thank you! Enjoy the book.";
+    public final String unSuccessCheckOutMessage = "Sorry, that book is not available.";
+    public final String successReturnMessage = "Thank you for returning the book.";
+    public final String unSuccessReturnMessage = "That is not a valid book to return.";
+
     private List<Book> books;
     private Map<Book, Boolean> bookCheckedOutList; // TODO: checkedoutBooks
 
@@ -17,26 +21,29 @@ public class BookKeeper {
         }
     }
 
-    //TODO: doing two things
     public void checkOutBook(String bookName) {
         Book book = findBook(bookName);
         if (book != null) {
             bookCheckedOutList.put(book, Boolean.TRUE);
-            printer.print("Thank you! Enjoy the book");
+            publishMessage(successCheckOutMessage);
         } else {
-            printer.print("Sorry, that book is not available");
+            publishMessage(unSuccessCheckOutMessage);
         }
     }
 
-    //TODO: doing two things
     public void returnBook(String bookName) {
         Book book = findBook(bookName);
         if (book != null) {
             bookCheckedOutList.put(book, Boolean.FALSE);
-            printer.print("Thank you for returning the book");
+            publishMessage(successReturnMessage);
         } else {
-            printer.print("That is not a valid book to return.");
+            publishMessage(unSuccessReturnMessage);
         }
+    }
+
+    public void publishMessage(String message) {
+        Printer printer = new Printer();
+        printer.print(message);
     }
 
     private Book findBook(String bookName) {
@@ -50,6 +57,7 @@ public class BookKeeper {
     }
 
     void displayListOfBooksAvailable() {
+        Printer printer = new Printer();
         StringBuilder bookListBuilder = new StringBuilder();
         for (Book book : books) {
             if (!bookCheckedOutList.get(book))
@@ -59,6 +67,7 @@ public class BookKeeper {
     }
 
     public void displayListOfAllBooks() {
+        Printer printer = new Printer();
         printer.print("Book Name\t\tYear Published\t\tAuthor Name");
         StringBuilder bookListBuilder = new StringBuilder();
         for (Book book : books) {

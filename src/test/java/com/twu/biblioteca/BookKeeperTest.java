@@ -47,7 +47,7 @@ class BookKeeperTest {
         BookKeeper bookKeeper = new BookKeeper(bookList);
         bookKeeper.checkOutBook("book1");
 
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
+        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
     }
 
 
@@ -61,7 +61,7 @@ class BookKeeperTest {
         BookKeeper bookKeeper = new BookKeeper(bookList);
         bookKeeper.checkOutBook("book2");
 
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
+        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
     }
 
     @Test
@@ -74,7 +74,7 @@ class BookKeeperTest {
         BookKeeper bookKeeper = new BookKeeper(bookList);
         bookKeeper.checkOutBook("hffhtdt");
 
-        verify(mockedPrintStream, times(1)).println("Sorry, that book is not available");
+        verify(mockedPrintStream, times(1)).println("Sorry, that book is not available.");
     }
 
     @Test
@@ -90,7 +90,7 @@ class BookKeeperTest {
         bookKeeper.returnBook("book1");
         bookKeeper.displayListOfBooksAvailable();
 
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
+        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
         verify(mockedPrintStream, times(1)).println("book2\t,\t2010\t,\txyz\n");
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
@@ -107,8 +107,8 @@ class BookKeeperTest {
         bookKeeper.returnBook("book1");
 
 
-        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book");
-        verify(mockedPrintStream, times(1)).println("Thank you for returning the book");
+        verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the book.");
+        verify(mockedPrintStream, times(1)).println("Thank you for returning the book.");
     }
 
     @Test
