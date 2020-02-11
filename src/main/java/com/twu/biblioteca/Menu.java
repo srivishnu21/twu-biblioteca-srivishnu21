@@ -1,20 +1,19 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Menu {
 
     Printer printer = new Printer();
     Reader reader;
     private Biblioteca biblioteca;
-    private List<MenuItem> menuItemList;
+    private Map<Integer, MenuItem> menuItemMap;
 
     public Menu(Biblioteca biblioteca, Reader reader) {
-
         this.biblioteca = biblioteca;
         this.reader = reader;
-        menuItemList = new ArrayList<>();
+        menuItemMap = new HashMap<>();
         addMenuItem();
     }
 
@@ -30,26 +29,21 @@ public class Menu {
     public void execute() {
         while (reader.hasNext()) {
             displayMenu();
-            boolean flag = false;
             int actionItem = reader.getInt();
-            for (MenuItem menuItem : menuItemList) {
-                if (actionItem == menuItem.getActionNumber()) {
-                    menuItem.execute();
-                    flag = true;
-                }
-            }
-            if (!flag) {
+            if (menuItemMap.containsKey(actionItem)) {
+                MenuItem menuItem = menuItemMap.get(actionItem);
+                menuItem.execute();
+            } else
                 printer.print("Invalid option.Please Enter correct option!");
-            }
             displayMenu();
         }
 
     }
 
     private void addMenuItem() {
-        menuItemList.add(new DisplayList(1, biblioteca));
-        menuItemList.add(new checkOut(2, biblioteca, reader));
-        menuItemList.add(new Return(3, biblioteca, reader));
-        menuItemList.add(new ExitApplication(4, biblioteca));
+        menuItemMap.put(1, new DisplayList(biblioteca));
+        menuItemMap.put(2, new CheckOut(biblioteca, reader));
+        menuItemMap.put(3, new Return(biblioteca, reader));
+        menuItemMap.put(4, new ExitApplication(biblioteca));
     }
 }
