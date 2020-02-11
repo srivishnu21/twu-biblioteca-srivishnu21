@@ -1,14 +1,9 @@
 package com.twu.biblioteca;
 
-public class ExitApplication extends MenuItem {
-
-    public ExitApplication(Biblioteca biblioteca) {
-        super( biblioteca);
-    }
-
+public class ExitApplication implements MenuItem {
 
     @Override
-    void execute() {
+    public void executeAction() {
         System.exit(0);
     }
 }

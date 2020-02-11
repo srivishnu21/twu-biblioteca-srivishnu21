@@ -1,17 +1,19 @@
 package com.twu.biblioteca;
 
-public class CheckOut extends MenuItem {
+public class CheckOut implements MenuItem {
     public final String successCheckOutMessage = "Thank you! Enjoy the book.";
     public final String unSuccessCheckOutMessage = "Sorry, that book is not available.";
+
     private Reader reader;
+    private Biblioteca biblioteca;
 
     public CheckOut(Biblioteca biblioteca, Reader reader) {
-        super(biblioteca);
+        this.biblioteca = biblioteca;
         this.reader = reader;
     }
 
     @Override
-    void execute() {
+    public void executeAction() {
         biblioteca.displayBookList();
         Printer printer = new Printer();
         printer.print("Please Enter the name of the book want to checkout");

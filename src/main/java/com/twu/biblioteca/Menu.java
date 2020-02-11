@@ -32,7 +32,7 @@ public class Menu {
             int actionItem = reader.getInt();
             if (menuItemMap.containsKey(actionItem)) {
                 MenuItem menuItem = menuItemMap.get(actionItem);
-                menuItem.execute();
+                menuItem.executeAction();
             } else
                 printer.print("Invalid option.Please Enter correct option!");
             displayMenu();
@@ -44,6 +44,6 @@ public class Menu {
         menuItemMap.put(1, new DisplayList(biblioteca));
         menuItemMap.put(2, new CheckOut(biblioteca, reader));
         menuItemMap.put(3, new Return(biblioteca, reader));
-        menuItemMap.put(4, new ExitApplication(biblioteca));
+        menuItemMap.put(4, new ExitApplication());
     }
 }

@@ -1,13 +1,15 @@
 package com.twu.biblioteca;
 
-public class DisplayList extends MenuItem {
+public class DisplayList implements MenuItem {
+
+    private Biblioteca biblioteca;
 
     public DisplayList(Biblioteca biblioteca) {
-        super(biblioteca);
+        this.biblioteca = biblioteca;
     }
 
     @Override
-    void execute() {
+   public void executeAction() {
         biblioteca.displayBookList();
     }
 }
