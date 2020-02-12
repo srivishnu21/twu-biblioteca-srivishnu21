@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Login {
     Reader reader;
+    UserAccount user;
     private List<UserAccount> userAccounts;
 
     public Login(Reader reader) {
@@ -19,9 +20,10 @@ public class Login {
         String userLibraryNumber = reader.getString();
         printer.print("Please Enter your Biblioteca Password");
         String userPassword = reader.getString();
-        if (userAccounts.contains(new UserAccount(userLibraryNumber, userPassword))) {
+        user = new UserAccount(userLibraryNumber, userPassword);
+        if (userAccounts.contains(user)) {
             printer.print("You have successfully logged in");
-        }
+        } else printer.print("Entered password and library number is wrong. Please try again!");
     }
 
 
