@@ -11,7 +11,8 @@ public class BibliotecaApp {
     static private List<Book> books;
     static private List<Movie> movies;
     static private Biblioteca biblioteca;
-
+    static private boolean loginStatus;
+    static private UserAccount user;
 
     public BibliotecaApp(List<Book> books, List<Movie> movies, Reader reader) {
         BibliotecaApp.books = books;
@@ -19,6 +20,23 @@ public class BibliotecaApp {
         BibliotecaApp.reader = reader;
         biblioteca = new Biblioteca(BibliotecaApp.books, BibliotecaApp.movies);
         menu = new Menu(BibliotecaApp.biblioteca, BibliotecaApp.reader);
+        loginStatus = false;
+    }
+
+    public static UserAccount getUser() {
+        return user;
+    }
+
+    public static void updateUser(UserAccount user) {
+        BibliotecaApp.user = user;
+    }
+
+    public static boolean isLoggedIn() {
+        return loginStatus;
+    }
+
+    public static void updateLoginStatus(boolean loginStatus) {
+        BibliotecaApp.loginStatus = loginStatus;
     }
 
     public static void main(String[] args) {

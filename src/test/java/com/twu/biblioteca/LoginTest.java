@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class LoginTest {
@@ -32,6 +33,8 @@ class LoginTest {
         login.executeLoginAction();
 
         verify(mockedPrintStream, times(1)).println("You have successfully logged in");
+        assertTrue(BibliotecaApp.isLoggedIn());
+        assertEquals(BibliotecaApp.getUser(),new UserAccount("123-6878","password"));
     }
 
     @Test
@@ -45,5 +48,7 @@ class LoginTest {
         login.executeLoginAction();
 
         verify(mockedPrintStream, times(1)).println("Entered password and library number is wrong. Please try again!");
+        assertFalse(BibliotecaApp.isLoggedIn());
+        assertNotEquals(BibliotecaApp.getUser(),new UserAccount("123-4354","sfgiuqasgfj"));
     }
 }

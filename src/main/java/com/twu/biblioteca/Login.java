@@ -9,6 +9,7 @@ public class Login {
         this.accountDetails = new AccountDetails();
     }
 
+
     public void executeLoginAction() {
         Printer printer = new Printer();
         printer.print("Please Enter your Biblioteca Number");
@@ -18,6 +19,8 @@ public class Login {
         UserAccount user = new UserAccount(userLibraryNumber, userPassword);
         if (accountDetails.CheckValidUser(user)) {
             printer.print("You have successfully logged in");
+            BibliotecaApp.updateLoginStatus(true);
+            BibliotecaApp.updateUser(user);
         } else printer.print("Entered password and library number is wrong. Please try again!");
     }
 

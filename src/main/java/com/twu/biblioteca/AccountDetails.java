@@ -13,10 +13,7 @@ public class AccountDetails {
     }
 
     public boolean CheckValidUser(UserAccount userToCheck) {
-        if (userAccounts.contains(userToCheck)) {
-            return true;
-        }
-        return false;
+        return userAccounts.contains(userToCheck);
     }
 
     private void initializeUserAccount() {
