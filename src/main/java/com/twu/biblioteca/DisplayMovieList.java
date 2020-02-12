@@ -10,6 +10,6 @@ public class DisplayMovieList implements MenuItem {
 
     @Override
     public void executeAction() {
-        biblioteca.displayMovies();
+        biblioteca.displayMovieList();
     }
 }

@@ -110,7 +110,7 @@ class BibliotecaTest {
         System.setOut(mockedPrintStream);
         Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), new ArrayList<>());
 
-        biblioteca.displayMovies();
+        biblioteca.displayMovieList();
 
         verify(mockedPrintStream, times(1)).println("Movie Name\t\tYear released\t\tDirector\t\tRatings");
     }
@@ -123,7 +123,7 @@ class BibliotecaTest {
                 , new Movie("movie2", 2008, "xyz", 5.0)));
         Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), movies);
 
-        biblioteca.displayMovies();
+        biblioteca.displayMovieList();
 
         verify(mockedPrintStream, times(1)).println("Movie Name\t\tYear released\t\tDirector\t\tRatings");
         verify(mockedPrintStream, times(1)).println("movie1\t\t2006\t\txyz\t\t9.2\n" +
@@ -154,6 +154,5 @@ class BibliotecaTest {
 
         assertFalse(biblioteca.checkOutMovie(new Movie("movie43234", 2006, "xyz", 9.2)));
     }
-
 
 }

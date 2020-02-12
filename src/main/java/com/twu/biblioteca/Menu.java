@@ -24,6 +24,7 @@ public class Menu {
         printer.print("3. Return a book");
         printer.print("4. Quit Application");
         printer.print("5. Display List of all movies");
+        printer.print("6. Check out a movie");
         printer.print("Please Enter A Number");
     }
 
@@ -44,8 +45,9 @@ public class Menu {
     private void addMenuItem() {
         menuItemMap.put(1, new DisplayBookList(biblioteca));
         menuItemMap.put(5, new DisplayMovieList(biblioteca));
-        menuItemMap.put(2, new CheckOut(biblioteca, reader));
+        menuItemMap.put(2, new CheckOutBook(biblioteca, reader));
         menuItemMap.put(3, new Return(biblioteca, reader));
         menuItemMap.put(4, new ExitApplication());
+        menuItemMap.put(6, new CheckOutMovie(biblioteca, reader));
     }
 }

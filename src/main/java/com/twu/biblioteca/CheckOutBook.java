@@ -1,13 +1,13 @@
 package com.twu.biblioteca;
 
-public class CheckOut implements MenuItem {
+public class CheckOutBook implements MenuItem {
     public final String successCheckOutMessage = "Thank you! Enjoy the book.";
     public final String unSuccessCheckOutMessage = "Sorry, that book is not available.";
 
     private Reader reader;
     private Biblioteca biblioteca;
 
-    public CheckOut(Biblioteca biblioteca, Reader reader) {
+    public CheckOutBook(Biblioteca biblioteca, Reader reader) {
         this.biblioteca = biblioteca;
         this.reader = reader;
     }

@@ -56,7 +56,7 @@ public class Biblioteca {
         publish(bookListBuilder.toString());
     }
 
-    public void displayMovies() {
+    public void displayMovieList() {
         publish("Movie Name\t\tYear released\t\tDirector\t\tRatings");
         StringBuilder movieListBuilder = new StringBuilder();
         for (Movie movie : movies) {

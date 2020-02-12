@@ -29,13 +29,12 @@ public class Movie {
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
         return releaseYear == movie.releaseYear &&
-                Double.compare(movie.rating, rating) == 0 &&
                 Objects.equals(movieName, movie.movieName) &&
                 Objects.equals(directorName, movie.directorName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(movieName, releaseYear, directorName, rating);
+        return Objects.hash(movieName, releaseYear, directorName);
     }
 }
