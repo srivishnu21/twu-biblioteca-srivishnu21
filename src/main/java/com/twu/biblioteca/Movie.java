@@ -13,4 +13,11 @@ public class Movie {
         this.directorName = directorName;
         this.rating = rating;
     }
+
+    public String toString() {
+        if (rating == -1) {
+            return movieName + "\t\t" + releaseYear + "\t\t" + directorName;
+        }
+        return movieName + "\t\t" + releaseYear + "\t\t" + directorName + "\t\t" + rating;
+    }
 }
