@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
+    //Library in spanish - biblioteca
 
     private List<Book> books;
     private List<Book> checkedOutBooks;
