@@ -1,17 +1,12 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Login {
-    Reader reader;
-    UserAccount user;
-    private List<UserAccount> userAccounts;
+    private Reader reader;
+    private AccountDetails accountDetails;
 
     public Login(Reader reader) {
         this.reader = reader;
-        this.userAccounts = new ArrayList<>();
-        initializeUserAccount();
+        this.accountDetails = new AccountDetails();
     }
 
     public void executeLoginAction() {
@@ -20,17 +15,10 @@ public class Login {
         String userLibraryNumber = reader.getString();
         printer.print("Please Enter your Biblioteca Password");
         String userPassword = reader.getString();
-        user = new UserAccount(userLibraryNumber, userPassword);
-        if (userAccounts.contains(user)) {
+        UserAccount user = new UserAccount(userLibraryNumber, userPassword);
+        if (accountDetails.CheckValidUser(user)) {
             printer.print("You have successfully logged in");
         } else printer.print("Entered password and library number is wrong. Please try again!");
     }
 
-
-    private void initializeUserAccount() {
-        userAccounts.add(new UserAccount("123-6878", "password"));
-        userAccounts.add(new UserAccount("123-7378", "password1"));
-        userAccounts.add(new UserAccount("123-3949", "password2"));
-        userAccounts.add(new UserAccount("123-4478", "password3"));
-    }
 }

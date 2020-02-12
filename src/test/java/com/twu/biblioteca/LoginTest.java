@@ -24,26 +24,26 @@ class LoginTest {
     @Test
     void testShouldVerifyUserIsValidAndChecksMessageIsDisplayed() {
         Reader reader = mock(Reader.class);
-        doReturn("123-6878","password").when(reader).getString();
+        doReturn("123-6878", "password").when(reader).getString();
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
         Login login = new Login(reader);
 
         login.executeLoginAction();
 
-        verify(mockedPrintStream,times(1)).println("You have successfully logged in");
+        verify(mockedPrintStream, times(1)).println("You have successfully logged in");
     }
 
     @Test
     void testShouldVerifyUserIsInValidAndChecksMessageIsDisplayed() {
         Reader reader = mock(Reader.class);
-        doReturn("123-4354","sfgiuqasgfj").when(reader).getString();
+        doReturn("123-4354", "sfgiuqasgfj").when(reader).getString();
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
         Login login = new Login(reader);
 
         login.executeLoginAction();
 
-        verify(mockedPrintStream,times(1)).println("Entered password and library number is wrong. Please try again!");
+        verify(mockedPrintStream, times(1)).println("Entered password and library number is wrong. Please try again!");
     }
 }

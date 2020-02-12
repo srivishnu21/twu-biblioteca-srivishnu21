@@ -15,9 +15,9 @@ class BibliotecaAppTest {
     void shouldCheckIfDisplayWelcomeMessageIsPrintedOrNot() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(new Menu(new Biblioteca(new ArrayList<>(), new ArrayList<>()), new Reader()));
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(new ArrayList<>(), new ArrayList<>(), new Reader());
 
-        bibliotecaApp.main(null);
+        BibliotecaApp.main(null);
 
         verify(mockedPrintStream, times(1)).println("Welcome to Biblioteca. " +
                 "Your one-stop-shop for great book titles in Bangalore!");
@@ -34,9 +34,7 @@ class BibliotecaAppTest {
         Reader reader = mock(Reader.class);
         when(reader.getInt()).thenReturn(1);
         doReturn(true, false).when(reader).hasNext();
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
-        Menu menu = new Menu(biblioteca, reader);
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(menu);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), reader);
 
         bibliotecaApp.main(null);
 
@@ -48,4 +46,5 @@ class BibliotecaAppTest {
         verify(mockedPrintStream, times(1)).println("harry potter\t,\t2003\t,\tJ.k rowling\n" +
                 "Two states\t,\t2005\t,\tchetan bhagat\nWings of fire\t,\t2005\t,\tapj\n");
     }
+
 }
