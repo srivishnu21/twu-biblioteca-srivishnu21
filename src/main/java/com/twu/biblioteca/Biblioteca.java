@@ -9,11 +9,13 @@ public class Biblioteca {
     private List<Book> books;
     private List<Movie> movies;
     private List<Book> checkedOutBooks;
+    private List<Movie> checkedOutMovies;
 
-    public Biblioteca(List<Book> books,List<Movie> movies) {
+    public Biblioteca(List<Book> books, List<Movie> movies) {
         this.books = books;
         this.movies = movies;
         checkedOutBooks = new ArrayList<>();
+        checkedOutMovies = new ArrayList<>();
     }
 
     public boolean checkOutBook(String bookName) {
@@ -21,6 +23,15 @@ public class Biblioteca {
         if (books.contains(bookToFind)) {
             checkedOutBooks.add(bookToFind);
             books.remove(bookToFind);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkOutMovie(Movie movieToFind) {
+        if (movies.contains(movieToFind)) {
+            checkedOutMovies.add(movieToFind);
+            movies.remove(movieToFind);
             return true;
         }
         return false;

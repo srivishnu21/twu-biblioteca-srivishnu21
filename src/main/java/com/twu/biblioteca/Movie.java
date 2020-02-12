@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.Objects;
+
 public class Movie {
 
     private String movieName;
@@ -19,5 +21,21 @@ public class Movie {
             return movieName + "\t\t" + releaseYear + "\t\t" + directorName;
         }
         return movieName + "\t\t" + releaseYear + "\t\t" + directorName + "\t\t" + rating;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return releaseYear == movie.releaseYear &&
+                Double.compare(movie.rating, rating) == 0 &&
+                Objects.equals(movieName, movie.movieName) &&
+                Objects.equals(directorName, movie.directorName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movieName, releaseYear, directorName, rating);
     }
 }
