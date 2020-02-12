@@ -163,5 +163,21 @@ class MenuTest {
         verify(mockedPrintStream, times(1)).println("Thank you! Enjoy the movie.");
     }
 
+    @Test
+    void shouldNotAbleToCheckOutAMovieWhichIsNotPresent() {
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        Reader reader = mock(Reader.class);
+        doReturn(6, 2006).when(reader).getInt();
+        doReturn("moksdbvj","xyz").when(reader).getString();
+        doReturn(true, false).when(reader).hasNext();
+        List<Movie> movies = new ArrayList<>(Arrays.asList(new Movie("movie1", 2006, "xyz", 9.2)
+                , new Movie("movie2", 2008, "xyz", 5.0)));
+        Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), movies);
+        Menu menu = new Menu(biblioteca, reader);
 
+        menu.execute();
+
+        verify(mockedPrintStream, times(1)).println("Sorry, that movie is not available.");
+    }
 }
