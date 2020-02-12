@@ -24,6 +24,7 @@ class MenuTest {
         verify(mockedPrintStream, times(1)).println("2. Check out a book");
         verify(mockedPrintStream, times(1)).println("3. Return a book");
         verify(mockedPrintStream, times(1)).println("4. Quit Application");
+        verify(mockedPrintStream, times(1)).println("5. Display List of all movies");
         verify(mockedPrintStream, times(1)).println("Please Enter A Number");
     }
 
@@ -127,6 +128,20 @@ class MenuTest {
         menu.execute();
 
         verify(mockedPrintStream, times(1)).println("That is not a valid book to return.");
+    }
+
+    @Test
+    void shouldCheckIfListOfMoviesIsDisplayed() {
+        Reader reader = mock(Reader.class);
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        when(reader.getInt()).thenReturn(5);
+        doReturn(true, false).when(reader).hasNext();
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>(), new ArrayList<>()), reader);
+
+        menu.execute();
+
+        verify(mockedPrintStream, times(1)).println("Movie Name\t\tYear released\t\tDirector\t\tRatings");
     }
 
 }
