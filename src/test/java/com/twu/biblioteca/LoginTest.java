@@ -1,0 +1,36 @@
+package com.twu.biblioteca;
+
+import org.junit.jupiter.api.Test;
+
+import java.io.PrintStream;
+
+import static org.mockito.Mockito.*;
+
+class LoginTest {
+
+    @Test
+    void testShouldAsksForUserInformation() {
+        Reader reader = mock(Reader.class);
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        Login login = new Login(reader);
+
+        login.executeLoginAction();
+
+        verify(mockedPrintStream, times(1)).println("Please Enter your Biblioteca Number");
+        verify(mockedPrintStream, times(1)).println("Please Enter your Biblioteca Password");
+    }
+
+    @Test
+    void testShouldVerifyUserIsValid() {
+        Reader reader = mock(Reader.class);
+        doReturn("123-6878","password").when(reader).getString();
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        Login login = new Login(reader);
+
+        login.executeLoginAction();
+
+        verify(mockedPrintStream,times(1)).println("You have successfully logged in");
+    }
+}
