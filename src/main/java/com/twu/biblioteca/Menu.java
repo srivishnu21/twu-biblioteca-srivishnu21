@@ -41,7 +41,7 @@ public class Menu {
     }
 
     private void addMenuItem() {
-        menuItemMap.put(1, new DisplayList(biblioteca));
+        menuItemMap.put(1, new DisplayItem(biblioteca));
         menuItemMap.put(2, new CheckOut(biblioteca, reader));
         menuItemMap.put(3, new Return(biblioteca, reader));
         menuItemMap.put(4, new ExitApplication());

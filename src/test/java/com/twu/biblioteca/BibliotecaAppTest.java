@@ -15,7 +15,7 @@ class BibliotecaAppTest {
     void shouldCheckIfDisplayWelcomeMessageIsPrintedOrNot() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(new Menu(new Biblioteca(new ArrayList<>()), new Reader()));
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(new Menu(new Biblioteca(new ArrayList<>(), new ArrayList<>()), new Reader()));
 
         bibliotecaApp.main(null);
 
@@ -34,7 +34,7 @@ class BibliotecaAppTest {
         Reader reader = mock(Reader.class);
         when(reader.getInt()).thenReturn(1);
         doReturn(true, false).when(reader).hasNext();
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
         Menu menu = new Menu(biblioteca, reader);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(menu);
 

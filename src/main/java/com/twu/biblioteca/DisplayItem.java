@@ -1,10 +1,10 @@
 package com.twu.biblioteca;
 
-public class DisplayList implements MenuItem {
+public class DisplayItem implements MenuItem {
 
     private Biblioteca biblioteca;
 
-    public DisplayList(Biblioteca biblioteca) {
+    public DisplayItem(Biblioteca biblioteca) {
         this.biblioteca = biblioteca;
     }
 

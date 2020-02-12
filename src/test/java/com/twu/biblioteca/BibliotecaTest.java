@@ -19,7 +19,7 @@ class BibliotecaTest {
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
 
         biblioteca.displayBookList();
 
@@ -32,7 +32,7 @@ class BibliotecaTest {
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
 
         biblioteca.checkOutBook("book1");
         biblioteca.displayBookList();
@@ -46,7 +46,7 @@ class BibliotecaTest {
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
 
         assertTrue(biblioteca.checkOutBook("book2"));
     }
@@ -57,7 +57,7 @@ class BibliotecaTest {
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
 
         biblioteca.checkOutBook("book1");
         biblioteca.checkOutBook("book1");
@@ -73,7 +73,7 @@ class BibliotecaTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
 
         assertFalse(biblioteca.checkOutBook("hffhtdt"));
     }
@@ -85,7 +85,7 @@ class BibliotecaTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
 
         assertTrue(biblioteca.checkOutBook("book1"));
         assertTrue(biblioteca.returnBook("book1"));
@@ -98,9 +98,35 @@ class BibliotecaTest {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
         biblioteca.returnBook("bsgb");
 
         assertFalse(biblioteca.checkOutBook("hffhtdt"));
+    }
+
+    @Test
+    void shouldCheckIfColumnNamesIsDisplayedAfterDisplayMoviesIsCalled() {
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), new ArrayList<>());
+
+        biblioteca.DisplayMovies();
+
+        verify(mockedPrintStream, times(1)).println("Movie Name\t\tYear released\t\tDirector\t\tRatings");
+    }
+
+    @Test
+    void shouldCheckIfListOfBooksIsDisplayed() {
+        PrintStream mockedPrintStream = mock(PrintStream.class);
+        System.setOut(mockedPrintStream);
+        List<Movie> movies = new ArrayList<>(Arrays.asList(new Movie("movie1", 2006, "xyz", 9.2)
+                , new Movie("movie2", 2008, "xyz", 5.0)));
+        Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), movies);
+
+        biblioteca.DisplayMovies();
+
+        verify(mockedPrintStream, times(1)).println("Movie Name\t\tYear released\t\tDirector\t\tRatings");
+        verify(mockedPrintStream, times(1)).println("movie1\t\t2006\t\txyz\t\t9.2\n" +
+                "movie2\t\t2008\t\txyz\t\t5.0\n");
     }
 }

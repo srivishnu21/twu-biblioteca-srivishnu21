@@ -7,10 +7,12 @@ public class Biblioteca {
     //Library in spanish - biblioteca
 
     private List<Book> books;
+    private List<Movie> movies;
     private List<Book> checkedOutBooks;
 
-    public Biblioteca(List<Book> books) {
+    public Biblioteca(List<Book> books,List<Movie> movies) {
         this.books = books;
+        this.movies = movies;
         checkedOutBooks = new ArrayList<>();
     }
 
@@ -41,6 +43,15 @@ public class Biblioteca {
             bookListBuilder.append(book.toString()).append("\n");
         }
         publish(bookListBuilder.toString());
+    }
+
+    public void DisplayMovies() {
+        publish("Movie Name\t\tYear released\t\tDirector\t\tRatings");
+        StringBuilder movieListBuilder = new StringBuilder();
+        for (Movie movie : movies) {
+            movieListBuilder.append(movie.toString()).append("\n");
+        }
+        publish(movieListBuilder.toString());
     }
 
     private void publish(String message) {

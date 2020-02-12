@@ -15,7 +15,7 @@ class MenuTest {
     void shouldCheckIfDisplayMenuMethodDisplaysEveryMenu() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Menu menu = new Menu(new Biblioteca(new ArrayList<>()), new Reader());
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>(), new ArrayList<>()), new Reader());
 
         menu.displayMenu();
 
@@ -34,7 +34,7 @@ class MenuTest {
         System.setOut(mockedPrintStream);
         when(reader.getInt()).thenReturn(1);
         doReturn(true, false).when(reader).hasNext();
-        Menu menu = new Menu(new Biblioteca(new ArrayList<>()), reader);
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>(), new ArrayList<>()), reader);
 
         menu.execute();
 
@@ -48,7 +48,7 @@ class MenuTest {
         Reader reader = mock(Reader.class);
         doReturn(22).when(reader).getInt();
         doReturn(true, false).when(reader).hasNext();
-        Menu menu = new Menu(new Biblioteca(new ArrayList<>()), reader);
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>(), new ArrayList<>()), reader);
 
         menu.execute();
 
@@ -65,7 +65,7 @@ class MenuTest {
         doReturn(true, false).when(reader).hasNext();
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
         Menu menu = new Menu(biblioteca, reader);
 
         menu.execute();
@@ -83,7 +83,7 @@ class MenuTest {
         doReturn(2).when(reader).getInt();
         doReturn("jfugj").when(reader).getString();
         doReturn(true, false).when(reader).hasNext();
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
         Menu menu = new Menu(biblioteca, reader);
 
         menu.execute();
@@ -102,7 +102,7 @@ class MenuTest {
         doReturn(2, 3).when(reader).getInt();
         doReturn("book1", "book1").when(reader).getString();
         doReturn(true, true, false).when(reader).hasNext();
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
         Menu menu = new Menu(biblioteca, reader);
 
         menu.execute();
@@ -121,7 +121,7 @@ class MenuTest {
         doReturn(3).when(reader).getInt();
         doReturn("book1").when(reader).getString();
         doReturn(true, false).when(reader).hasNext();
-        Biblioteca biblioteca = new Biblioteca(bookList);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
         Menu menu = new Menu(biblioteca, reader);
 
         menu.execute();
