@@ -2,14 +2,14 @@ package com.twu.biblioteca;
 
 public class DisplayBookList implements MenuItem {
 
-    private Biblioteca biblioteca;
+    private Library library;
 
-    public DisplayBookList(Biblioteca biblioteca) {
-        this.biblioteca = biblioteca;
+    public DisplayBookList(Library library) {
+        this.library = library;
     }
 
     @Override
    public void executeAction() {
-        biblioteca.displayBookList();
+        library.displayList();
     }
 }

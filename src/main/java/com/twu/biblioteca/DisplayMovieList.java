@@ -1,15 +1,14 @@
 package com.twu.biblioteca;
 
 public class DisplayMovieList implements MenuItem {
-    private Biblioteca biblioteca;
+    private Library library;
 
-    public DisplayMovieList(Biblioteca biblioteca) {
-
-        this.biblioteca = biblioteca;
+    public DisplayMovieList(Library library) {
+        this.library = library;
     }
 
     @Override
     public void executeAction() {
-        biblioteca.displayMovieList();
+        library.displayList();
     }
 }

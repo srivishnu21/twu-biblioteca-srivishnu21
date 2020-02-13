@@ -5,11 +5,11 @@ public class Return implements MenuItem {
     public final String unSuccessReturnMessage = "That is not a valid book to return.";
 
     private Reader reader;
-    private Biblioteca biblioteca;
+    private Library library;
 
-    public Return(Biblioteca biblioteca, Reader reader) {
-        this.biblioteca = biblioteca;
+    public Return(Reader reader, Library library) {
         this.reader = reader;
+        this.library = library;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class Return implements MenuItem {
         System.out.println(3);
         printer.print("Please Enter the name of the book want to return");
         String bookToReturn = reader.getString();
-        if (biblioteca.returnBook(bookToReturn)) {
+        if (library.returnItem(new Book(bookToReturn,-1,""))) {
             printer.print(successReturnMessage);
             return;
         }

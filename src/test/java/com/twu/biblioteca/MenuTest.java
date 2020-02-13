@@ -15,7 +15,7 @@ class MenuTest {
     void shouldCheckIfDisplayMenuMethodDisplaysEveryMenu() {
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Menu menu = new Menu(new Biblioteca(new ArrayList<>(), new ArrayList<>()), new Reader());
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>()), new Reader());
 
         menu.displayMenu();
 
@@ -36,7 +36,7 @@ class MenuTest {
         System.setOut(mockedPrintStream);
         when(reader.getInt()).thenReturn(1);
         doReturn(true, false).when(reader).hasNext();
-        Menu menu = new Menu(new Biblioteca(new ArrayList<>(), new ArrayList<>()), reader);
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>()), reader);
 
         menu.execute();
 
@@ -50,7 +50,7 @@ class MenuTest {
         Reader reader = mock(Reader.class);
         doReturn(22).when(reader).getInt();
         doReturn(true, false).when(reader).hasNext();
-        Menu menu = new Menu(new Biblioteca(new ArrayList<>(), new ArrayList<>()), reader);
+        Menu menu = new Menu(new Biblioteca(new ArrayList<>()), reader);
 
         menu.execute();
 
@@ -59,7 +59,7 @@ class MenuTest {
 
     @Test
     void shouldCheckUserCanCheckOutABook() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         Reader reader = mock(Reader.class);
         doReturn(2).when(reader).getInt();
@@ -67,7 +67,7 @@ class MenuTest {
         doReturn(true, false).when(reader).hasNext();
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(bookList);
         Menu menu = new Menu(biblioteca, reader);
 
         menu.execute();
@@ -77,7 +77,7 @@ class MenuTest {
 
     @Test
     void shouldNotCheckOutABookIfItIsInvalid() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
@@ -85,7 +85,7 @@ class MenuTest {
         doReturn(2).when(reader).getInt();
         doReturn("jfugj").when(reader).getString();
         doReturn(true, false).when(reader).hasNext();
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(bookList);
         Menu menu = new Menu(biblioteca, reader);
 
         menu.execute();
@@ -96,7 +96,7 @@ class MenuTest {
 
     @Test
     void shouldReturnABookIfItIsValid() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
@@ -104,7 +104,7 @@ class MenuTest {
         doReturn(2, 3).when(reader).getInt();
         doReturn("book1", "book1").when(reader).getString();
         doReturn(true, true, false).when(reader).hasNext();
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(bookList);
         Menu menu = new Menu(biblioteca, reader);
 
         menu.execute();
@@ -115,7 +115,7 @@ class MenuTest {
 
     @Test
     void shouldNotReturnABookIfItIsNotValid() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
@@ -123,7 +123,7 @@ class MenuTest {
         doReturn(3).when(reader).getInt();
         doReturn("book1").when(reader).getString();
         doReturn(true, false).when(reader).hasNext();
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(bookList);
         Menu menu = new Menu(biblioteca, reader);
 
         menu.execute();
@@ -138,7 +138,7 @@ class MenuTest {
         System.setOut(mockedPrintStream);
         when(reader.getInt()).thenReturn(5);
         doReturn(true, false).when(reader).hasNext();
-        Menu menu = new Menu(new Biblioteca(new ArrayList<>(), new ArrayList<>()), reader);
+        Menu menu = new Menu(new MovieLibrary(new ArrayList<>()), reader);
 
         menu.execute();
 
@@ -155,8 +155,8 @@ class MenuTest {
         doReturn(true, false).when(reader).hasNext();
         List<Movie> movies = new ArrayList<>(Arrays.asList(new Movie("movie1", 2006, "xyz", 9.2)
                 , new Movie("movie2", 2008, "xyz", 5.0)));
-        Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), movies);
-        Menu menu = new Menu(biblioteca, reader);
+        MovieLibrary movieLibrary = new MovieLibrary(new ArrayList<>());
+        Menu menu = new Menu(movieLibrary, reader);
 
         menu.execute();
 
@@ -171,10 +171,10 @@ class MenuTest {
         doReturn(6, 2006).when(reader).getInt();
         doReturn("moksdbvj","xyz").when(reader).getString();
         doReturn(true, false).when(reader).hasNext();
-        List<Movie> movies = new ArrayList<>(Arrays.asList(new Movie("movie1", 2006, "xyz", 9.2)
+        List<LibraryItems> movies = new ArrayList<>(Arrays.asList(new Movie("movie1", 2006, "xyz", 9.2)
                 , new Movie("movie2", 2008, "xyz", 5.0)));
-        Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), movies);
-        Menu menu = new Menu(biblioteca, reader);
+        MovieLibrary movieLibrary = new MovieLibrary(movies);
+        Menu menu = new Menu(movieLibrary, reader);
 
         menu.execute();
 

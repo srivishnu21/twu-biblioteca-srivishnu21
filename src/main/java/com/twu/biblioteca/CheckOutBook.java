@@ -5,21 +5,22 @@ public class CheckOutBook implements MenuItem {
     public final String unSuccessCheckOutMessage = "Sorry, that book is not available.";
 
     private Reader reader;
-    private Biblioteca biblioteca;
+    private Library library;
 
-    public CheckOutBook(Biblioteca biblioteca, Reader reader) {
-        this.biblioteca = biblioteca;
+    public CheckOutBook(Reader reader, Library library) {
         this.reader = reader;
+        this.library = library;
     }
 
     @Override
     public void executeAction() {
-        biblioteca.displayBookList();
+        library.displayList();
         Printer printer = new Printer();
         printer.print("Please Enter the name of the book want to checkout");
         reader.getString();
         String bookToCheckOut = reader.getString();
-        if (biblioteca.checkOutBook(bookToCheckOut)) {
+        Book book = new Book(bookToCheckOut, -1, "");
+        if (library.checkOutItem(book)) {
             printer.print(successCheckOutMessage);
             return;
         }

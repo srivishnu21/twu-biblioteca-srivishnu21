@@ -7,11 +7,11 @@ public class Menu {
 
     Printer printer = new Printer();
     Reader reader;
-    private Biblioteca biblioteca;
+    private Library library;
     private Map<Integer, MenuItem> menuItemMap;
 
-    public Menu(Biblioteca biblioteca, Reader reader) {
-        this.biblioteca = biblioteca;
+    public Menu(Library library, Reader reader) {
+        this.library = library;
         this.reader = reader;
         menuItemMap = new HashMap<>();
         addMenuItem();
@@ -43,11 +43,11 @@ public class Menu {
     }
 
     private void addMenuItem() {
-        menuItemMap.put(1, new DisplayBookList(biblioteca));
-        menuItemMap.put(5, new DisplayMovieList(biblioteca));
-        menuItemMap.put(2, new CheckOutBook(biblioteca, reader));
-        menuItemMap.put(3, new Return(biblioteca, reader));
+        menuItemMap.put(1, new DisplayBookList(library));
+        menuItemMap.put(5, new DisplayMovieList(library));
+        menuItemMap.put(2, new CheckOutBook(reader, library));
+        menuItemMap.put(3, new Return(reader, library));
         menuItemMap.put(4, new ExitApplication());
-        menuItemMap.put(6, new CheckOutMovie(biblioteca, reader));
+        menuItemMap.put(6, new CheckOutMovie(library, reader));
     }
 }

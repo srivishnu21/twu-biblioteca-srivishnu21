@@ -15,144 +15,94 @@ class BibliotecaTest {
 
     @Test
     void shouldDisplayListOfBooksAvailable() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(bookList);
 
-        biblioteca.displayBookList();
+        biblioteca.displayList();
 
         verify(mockedPrintStream, times(1)).println("book1\t,\t2000\t,\tabc\nbook2\t,\t2010\t,\txyz\n");
     }
 
     @Test
     void shouldCheckOutABookItIsInLibrary() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(bookList);
 
-        biblioteca.checkOutBook("book1");
-        biblioteca.displayBookList();
+        biblioteca.checkOutItem(new Book("book1",-1,""));
+        biblioteca.displayList();
 
         verify(mockedPrintStream, times(1)).println("book2\t,\t2010\t,\txyz\n");
     }
 
     @Test
     void shouldCheckOutABookIfItContainsThenDisplaySuccessAMessage() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(bookList);
 
-        assertTrue(biblioteca.checkOutBook("book2"));
+        assertTrue(biblioteca.checkOutItem(new Book("book2",-1,"")));
     }
 
     @Test
     void shouldCheckOutABookWhichIsNotInLibrary() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(bookList);
 
-        biblioteca.checkOutBook("book1");
-        biblioteca.checkOutBook("book1");
+        biblioteca.checkOutItem(new Book("book1",-1,""));
+        biblioteca.checkOutItem(new Book("book1",-1,""));
 
-        assertTrue(biblioteca.checkOutBook("book2"));
-        assertFalse(biblioteca.checkOutBook("book2"));
+        assertTrue(biblioteca.checkOutItem(new Book("book2",-1,"")));
+        assertFalse(biblioteca.checkOutItem(new Book("book2",-1,"")));
     }
 
     @Test
     void shouldThrowAUnSuccessfulMessageWhenBookItIsNotInLibrary() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(bookList);
 
-        assertFalse(biblioteca.checkOutBook("hffhtdt"));
+        assertFalse(biblioteca.checkOutItem(new Book("hffhtdt",-1,"")));
     }
 
     @Test
     void shouldAbleReturnABookAndDisplayASuccessMessage() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(bookList);
 
-        assertTrue(biblioteca.checkOutBook("book1"));
-        assertTrue(biblioteca.returnBook("book1"));
+        assertTrue(biblioteca.checkOutItem(new Book("book1",-1,"")));
+        assertTrue(biblioteca.returnItem(new Book("book1",-1,"")));
     }
 
     @Test
     void shouldNotAbleReturnABookNotBelongsToThisLibraryAndDisplayAUnSuccessMessage() {
-        List<Book> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
+        List<LibraryItems> bookList = new ArrayList<>(Arrays.asList(new Book("book1", 2000, "abc"),
                 (new Book("book2", 2010, "xyz"))));
         PrintStream mockedPrintStream = mock(PrintStream.class);
         System.setOut(mockedPrintStream);
 
-        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<>());
-        biblioteca.returnBook("bsgb");
+        Biblioteca biblioteca = new Biblioteca(bookList);
+        biblioteca.returnItem(new Book("bsgb",-1,""));
 
-        assertFalse(biblioteca.checkOutBook("hffhtdt"));
+        assertFalse(biblioteca.checkOutItem(new Book("hffhtdt",-1,"")));
     }
 
-    @Test
-    void shouldCheckIfColumnNamesIsDisplayedAfterDisplayMoviesIsCalled() {
-        PrintStream mockedPrintStream = mock(PrintStream.class);
-        System.setOut(mockedPrintStream);
-        Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), new ArrayList<>());
-
-        biblioteca.displayMovieList();
-
-        verify(mockedPrintStream, times(1)).println("Movie Name\t\tYear released\t\tDirector\t\tRatings");
-    }
-
-    @Test
-    void shouldCheckIfListOfBooksIsDisplayed() {
-        PrintStream mockedPrintStream = mock(PrintStream.class);
-        System.setOut(mockedPrintStream);
-        List<Movie> movies = new ArrayList<>(Arrays.asList(new Movie("movie1", 2006, "xyz", 9.2)
-                , new Movie("movie2", 2008, "xyz", 5.0)));
-        Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), movies);
-
-        biblioteca.displayMovieList();
-
-        verify(mockedPrintStream, times(1)).println("Movie Name\t\tYear released\t\tDirector\t\tRatings");
-        verify(mockedPrintStream, times(1)).println("movie1\t\t2006\t\txyz\t\t9.2\n" +
-                "movie2\t\t2008\t\txyz\t\t5.0\n");
-    }
-
-    @Test
-    void shouldCheckOutAMovieIfItIsPresent() {
-        PrintStream mockedPrintStream = mock(PrintStream.class);
-        System.setOut(mockedPrintStream);
-        Movie movie1 = new Movie("movie1", 2006, "xyz", 9.2);
-        Movie movie2 = new Movie("movie2", 2008, "xyz", 5.0);
-        List<Movie> movies = new ArrayList<>(Arrays.asList(movie1, movie2));
-        Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), movies);
-
-        assertTrue(biblioteca.checkOutMovie(new Movie("movie1", 2006, "xyz", 9.2)));
-        assertFalse(biblioteca.checkOutMovie(new Movie("movie1", 2006, "xyz", 9.2)));
-    }
-
-    @Test
-    void shouldCheckOutAMovieIfItIsNotPresent() {
-        PrintStream mockedPrintStream = mock(PrintStream.class);
-        System.setOut(mockedPrintStream);
-        Movie movie1 = new Movie("movie1", 2006, "xyz", 9.2);
-        Movie movie2 = new Movie("movie2", 2008, "xyz", 5.0);
-        List<Movie> movies = new ArrayList<>(Arrays.asList(movie1, movie2));
-        Biblioteca biblioteca = new Biblioteca(new ArrayList<>(), movies);
-
-        assertFalse(biblioteca.checkOutMovie(new Movie("movie43234", 2006, "xyz", 9.2)));
-    }
 
 }
