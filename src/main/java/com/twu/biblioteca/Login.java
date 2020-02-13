@@ -19,9 +19,11 @@ public class Login {
         UserAccount user = new UserAccount(userLibraryNumber, userPassword);
         if (accountDetails.CheckValidUser(user)) {
             printer.print("You have successfully logged in");
-            BibliotecaApp.updateLoginStatus(true);
             BibliotecaApp.updateUser(user);
-        } else printer.print("Entered password and library number is wrong. Please try again!");
+            BibliotecaApp.start();
+        } else {
+            printer.print("Entered password and library number is wrong. Please try again!");
+            executeLoginAction();
+        }
     }
-
 }

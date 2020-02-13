@@ -17,6 +17,7 @@ public class CheckOutBook implements MenuItem {
         biblioteca.displayBookList();
         Printer printer = new Printer();
         printer.print("Please Enter the name of the book want to checkout");
+        reader.getString();
         String bookToCheckOut = reader.getString();
         if (biblioteca.checkOutBook(bookToCheckOut)) {
             printer.print(successCheckOutMessage);

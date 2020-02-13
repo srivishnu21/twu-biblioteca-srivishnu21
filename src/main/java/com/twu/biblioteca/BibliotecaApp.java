@@ -6,21 +6,31 @@ public class BibliotecaApp {
 
     static String welcomeMessage = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
     static Printer printer = new Printer();
-    static Reader reader;
+    static Reader reader =new Reader();
     static private Menu menu;
+    static private Login login;
     static private List<Book> books;
     static private List<Movie> movies;
     static private Biblioteca biblioteca;
-    static private boolean loginStatus;
     static private UserAccount user;
 
-    public BibliotecaApp(List<Book> books, List<Movie> movies, Reader reader) {
-        BibliotecaApp.books = books;
-        BibliotecaApp.movies = movies;
-        BibliotecaApp.reader = reader;
+    public BibliotecaApp() {
+        InputDetails inputDetails=new InputDetails();
+        BibliotecaApp.books = inputDetails.getBooks();
+        BibliotecaApp.movies = inputDetails.getMovie();
+        BibliotecaApp.login = new Login(reader);
         biblioteca = new Biblioteca(BibliotecaApp.books, BibliotecaApp.movies);
         menu = new Menu(BibliotecaApp.biblioteca, BibliotecaApp.reader);
-        loginStatus = false;
+    }
+
+    public static void main(String[] args) {
+        new BibliotecaApp();
+        printer.print(welcomeMessage);
+        login.executeLoginAction();
+    }
+
+    public static void start(){
+        menu.execute();
     }
 
     public static UserAccount getUser() {
@@ -29,19 +39,6 @@ public class BibliotecaApp {
 
     public static void updateUser(UserAccount user) {
         BibliotecaApp.user = user;
-    }
-
-    public static boolean isLoggedIn() {
-        return loginStatus;
-    }
-
-    public static void updateLoginStatus(boolean loginStatus) {
-        BibliotecaApp.loginStatus = loginStatus;
-    }
-
-    public static void main(String[] args) {
-        printer.print(welcomeMessage);
-        menu.execute();
     }
 
 }
