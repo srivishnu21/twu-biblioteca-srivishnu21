@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.Objects;
 
-public class Movie {
+public class Movie implements LibraryItems{
 
     private String movieName;
     private int releaseYear;
